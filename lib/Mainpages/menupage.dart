@@ -10,7 +10,7 @@ class _MenupageState extends State<Menupage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(context, strTitle: "Menu"),
+      appBar: appbar(context, strTitle: "My Order"),
     );
   }
 }

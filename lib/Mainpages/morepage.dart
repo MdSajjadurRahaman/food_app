@@ -11,7 +11,7 @@ class _MorepageState extends State<Morepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appbar(context, strTitle: "Jone Doe"),
+      appBar: appbar(context, strTitle: "Hi, Jone Doe"),
       body: new Scaffold(
           body: Center(
         child: Column(

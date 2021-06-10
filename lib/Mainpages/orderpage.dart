@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/widgets/headerwidget.dart';
 
 class Orderpage extends StatefulWidget {
   @override
@@ -8,6 +9,12 @@ class Orderpage extends StatefulWidget {
 class _OrderpageState extends State<Orderpage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: appbar(context, strTitle: "My Order"),
+      body: Container(
+        alignment: Alignment.center,
+        child: Text("No order for now :("),
+      ),
+    );
   }
 }

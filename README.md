@@ -1,6 +1,6 @@
 # food_app
 
-A new Flutter project.
+A new universal food reservation, order and delivery for the universal client.
 
 ## Getting Started
 
