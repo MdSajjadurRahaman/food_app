@@ -19,8 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue, scaffoldBackgroundColor: Colors.white),
       home: SplashScreen(),
     );
   }
@@ -32,6 +31,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  // ignore: unused_field
   final GlobalKey<ScaffoldState> _globalKey = new GlobalKey<ScaffoldState>();
   @override
   void initState() {
