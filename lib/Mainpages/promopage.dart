@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/widgets/headerwidget.dart';
 
 class Promopage extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class Promopage extends StatefulWidget {
 class _PromopageState extends State<Promopage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: appbar(context, strTitle: "Promo"),
+    );
   }
 }

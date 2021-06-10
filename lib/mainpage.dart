@@ -49,7 +49,6 @@ class _MainPageState extends State<MainPage> {
           Homepage(),
           Menupage(),
           Promopage(),
-          Orderpage(),
           Morepage(),
         ],
         controller: pageController,

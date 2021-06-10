@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/widgets/headerwidget.dart';
 
 class Morepage extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class Morepage extends StatefulWidget {
 class _MorepageState extends State<Morepage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: appbar(context, strTitle: "Jone Doe"),
+    );
   }
 }
