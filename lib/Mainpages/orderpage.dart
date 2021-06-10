@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/tabheaderwidget.dart';
 
 class Orderpage extends StatefulWidget {
@@ -13,15 +12,23 @@ class _OrderpageState extends State<Orderpage> {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
-          appBar: appbartab(context, strTitle: "My Order"),
-          body: const TabBarView(children: <Widget>[
+          appBar: appbartab(context, strTitle: "My Orders"),
+          body: TabBarView(children: <Widget>[
             Center(
-              child: Text("No ongoing order"),
+              child: berjalan(),
             ),
             Center(
-              child: Text("No history available"),
+              child: sejarah(),
             )
           ]),
         ));
   }
+}
+
+sejarah() {
+  return Text("No history available");
+}
+
+berjalan() {
+  return Text("No ongoing order");
 }
