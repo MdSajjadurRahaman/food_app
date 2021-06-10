@@ -10,7 +10,11 @@ class _PromopageState extends State<Promopage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(context, strTitle: "Promo"),
+      appBar: appbar(context, strTitle: "Promotions"),
+      body: Container(
+        alignment: Alignment.center,
+        child: Text("No Promotions Available"),
+      ),
     );
   }
 }

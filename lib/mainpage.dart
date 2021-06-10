@@ -47,8 +47,8 @@ class _MainPageState extends State<MainPage> {
       body: PageView(
         children: <Widget>[
           Homepage(),
-          Menupage(),
           Promopage(),
+          Orderpage(),
           Morepage(),
         ],
         controller: pageController,
@@ -75,31 +75,31 @@ class _MainPageState extends State<MainPage> {
                 title: Text("Home")),
             SalomonBottomBarItem(
                 icon: Icon(
-                  Icons.list_alt_rounded,
+                  Icons.confirmation_number_rounded,
                   color: getPageIndex == 1
                       ? HexColor("#FF9900")
                       : HexColor("#3C3C3C"),
                 ),
                 selectedColor: HexColor("#FF9900"),
-                title: Text("Booking")),
+                title: Text("Promo")),
             SalomonBottomBarItem(
                 icon: Icon(
-                  Icons.notifications,
+                  Icons.history,
                   color: getPageIndex == 2
                       ? HexColor("#FF9900")
                       : HexColor("#3C3C3C"),
                 ),
                 selectedColor: HexColor("#FF9900"),
-                title: Text("Notification")),
+                title: Text("Order")),
             SalomonBottomBarItem(
                 icon: Icon(
-                  Icons.account_circle,
+                  Icons.menu,
                   color: getPageIndex == 3
                       ? HexColor("#FF9900")
                       : HexColor("#3C3C3C"),
                 ),
                 selectedColor: HexColor("#FF9900"),
-                title: Text("Profile")),
+                title: Text("More")),
           ],
         ),
       ),
