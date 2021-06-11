@@ -66,39 +66,31 @@ class _MainPageState extends State<MainPage> {
             SalomonBottomBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: getPageIndex == 0
-                      ? HexColor("#FF9900")
-                      : HexColor("#3C3C3C"),
+                  color: getPageIndex == 0 ? Colors.red : HexColor("#3C3C3C"),
                 ),
                 //unselectedColor: HexColor("#3C3C3C"),
-                selectedColor: HexColor("#FF9900"),
+                selectedColor: Colors.red,
                 title: Text("Home")),
             SalomonBottomBarItem(
                 icon: Icon(
                   Icons.confirmation_number_rounded,
-                  color: getPageIndex == 1
-                      ? HexColor("#FF9900")
-                      : HexColor("#3C3C3C"),
+                  color: getPageIndex == 1 ? Colors.red : HexColor("#3C3C3C"),
                 ),
-                selectedColor: HexColor("#FF9900"),
+                selectedColor: Colors.red,
                 title: Text("Promo")),
             SalomonBottomBarItem(
                 icon: Icon(
                   Icons.history,
-                  color: getPageIndex == 2
-                      ? HexColor("#FF9900")
-                      : HexColor("#3C3C3C"),
+                  color: getPageIndex == 2 ? Colors.red : HexColor("#3C3C3C"),
                 ),
-                selectedColor: HexColor("#FF9900"),
+                selectedColor: Colors.red,
                 title: Text("Order")),
             SalomonBottomBarItem(
                 icon: Icon(
                   Icons.menu,
-                  color: getPageIndex == 3
-                      ? HexColor("#FF9900")
-                      : HexColor("#3C3C3C"),
+                  color: getPageIndex == 3 ? Colors.red : HexColor("#3C3C3C"),
                 ),
-                selectedColor: HexColor("#FF9900"),
+                selectedColor: Colors.red,
                 title: Text("More")),
           ],
         ),

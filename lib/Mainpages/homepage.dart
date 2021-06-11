@@ -57,12 +57,12 @@ class _HomepageState extends State<Homepage> {
           scrollDirection: Axis.horizontal,
           itemCount: promotions.length,
           itemBuilder: (BuildContext context, int index) => Container(
-                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(right: 10),
+                width: MediaQuery.of(context).size.width - 40,
                 height: 100,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(
-                            "https://st4.depositphotos.com/14582236/30991/v/1600/depositphotos_309919246-stock-illustration-pepperoni-pizza-banner-ads.jpg"),
+                        image: NetworkImage(promotions[index].url),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10)),
               )),
