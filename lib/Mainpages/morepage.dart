@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/mainpage.dart';
+import 'package:food_app/widgets/sampledata.dart';
 
 class Morepage extends StatefulWidget {
   @override
@@ -15,6 +16,13 @@ class _MorepageState extends State<Morepage> {
       appBar: appbar(context, strTitle: "Hi, Jone Doe"),
       body: tombol(),
     );
+  }
+}
+
+class NoMyProfile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
   }
 }
 
@@ -42,23 +50,61 @@ class MyProfile extends StatelessWidget {
             ),
             profilPic(),
             SizedBox(height: 30),
-            buildTextField("Full Name", "Ikhwanul Jone Doe", false),
-            buildTextField("Email", "jone.doe@gmail.com", false),
-            buildTextField("Phone Number", "+601112223334", false),
-            SizedBox(height: 30),
+            buildTextField("Full Name", profiles[0].user, false),
+            buildTextField("Phone Number", profiles[0].phone, false),
+            buildTextField("Email", profiles[0].email, false),
+            buildTextField("Location", profiles[0].location, false),
+            SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                OutlinedButton(
+                  onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Morepage()))
+                  },
+                  child: Text("CANCEL",
+                      style: TextStyle(
+                          fontSize: 15, letterSpacing: 2, color: Colors.red)),
+                  style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+                ElevatedButton(
+                  onPressed: () => {},
+                  child: Text("SAVE",
+                      style: TextStyle(
+                          fontSize: 15, letterSpacing: 2, color: Colors.white)),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 12,
+            ),
             ElevatedButton.icon(
-                onPressed: () => {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainPage()))
-                    },
-                icon: Icon(Icons.close),
-                label: Text("Sign Out"))
+              onPressed: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MainPage()))
+              },
+              icon: Icon(Icons.close),
+              label: Text("Sign Out"),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,
+              ),
+            ),
           ],
         ));
   }
 
   Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
+      String labelText, placeholder, bool isPasswordTextField) {
     return Padding(
       padding: EdgeInsets.only(bottom: 30),
       child: TextField(
@@ -66,7 +112,7 @@ class MyProfile extends StatelessWidget {
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
                 ? IconButton(
-                    onPressed: () {},
+                    onPressed: () => {},
                     icon: Icon(
                       Icons.remove_red_eye,
                       color: Colors.grey,

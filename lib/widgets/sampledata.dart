@@ -5,6 +5,19 @@ class Menu {
   final String url;
 }
 
+class Profile {
+  const Profile(this.user, this.email, this.phone, this.location);
+  final user;
+  final email;
+  final phone;
+  final location;
+}
+
+List<Profile> profiles = <Profile>[
+  const Profile(
+      "Ikhwa Joe Doe", "joe.doe@gmail.com", "+601119996665", "Kuala Lumpur"),
+];
+
 List<Menu> menus = <Menu>[
   const Menu('Special Cheesy Pizza', "20",
       "https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1260968.jpg&fm=jpg"),

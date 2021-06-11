@@ -133,7 +133,7 @@ class _HomepageState extends State<Homepage> {
                         0.4) //HexColor("#690000").withOpacity(0.35)
                     ),
                 child: Text(
-                  menus[index].name,
+                  menus[index].name, //sampledata
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
