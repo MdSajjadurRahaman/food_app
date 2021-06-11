@@ -52,6 +52,27 @@ class _HomepageState extends State<Homepage> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 100,
+      child: ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: promotions.length,
+          itemBuilder: (BuildContext context, int index) => Container(
+                width: MediaQuery.of(context).size.width,
+                height: 100,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "https://st4.depositphotos.com/14582236/30991/v/1600/depositphotos_309919246-stock-illustration-pepperoni-pizza-banner-ads.jpg"),
+                        fit: BoxFit.cover),
+                    borderRadius: BorderRadius.circular(10)),
+              )),
+    );
+  }
+
+  promoBanner2() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 100,
       decoration: BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
@@ -104,7 +125,7 @@ class _HomepageState extends State<Homepage> {
 
   menu() {
     return Container(
-      height: 1000,
+      height: 1200,
       width: MediaQuery.of(context).size.width,
       child: GridView.builder(
           shrinkWrap: true,
