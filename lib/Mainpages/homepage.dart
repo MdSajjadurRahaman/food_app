@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/widgets/headerwidget.dart';
+import 'package:food_app/widgets/sampledata.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Homepage extends StatefulWidget {
@@ -105,188 +106,42 @@ class _HomepageState extends State<Homepage> {
     return Container(
       height: 1000,
       width: MediaQuery.of(context).size.width,
-      child: GridView.count(
-        primary: false,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
-        children: <Widget>[
-          Container(
-            height: 310,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1260968.jpg&fm=jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              alignment: Alignment.bottomLeft,
+      child: GridView.builder(
+          shrinkWrap: true,
+          physics: ScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 10, mainAxisSpacing: 10, crossAxisCount: 2),
+          itemCount: menus.length,
+          itemBuilder: (BuildContext ctx, index) {
+            return Container(
+              height: 310,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: HexColor("#000000")
-                      .withOpacity(0.4) //HexColor("#690000").withOpacity(0.35)
-                  ),
-              child: const Text(
-                "Super Cheesy Pizza",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
+                borderRadius: BorderRadius.circular(15.0),
+                image: DecorationImage(
+                  image: NetworkImage(menus[index].url),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          ),
-          Container(
-            height: 310,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/2762942/pexels-photo-2762942.jpeg?cs=srgb&dl=pexels-ana-madeleine-uribe-2762942.jpg&fm=jpg"),
-                fit: BoxFit.cover,
+              child: Container(
+                padding: EdgeInsets.all(15),
+                alignment: Alignment.bottomLeft,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: HexColor("#000000").withOpacity(
+                        0.4) //HexColor("#690000").withOpacity(0.35)
+                    ),
+                child: Text(
+                  menus[index].name,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
               ),
-            ),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              alignment: Alignment.bottomLeft,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: HexColor("#000000")
-                      .withOpacity(0.4) //HexColor("#690000").withOpacity(0.35)
-                  ),
-              child: const Text(
-                "Super Cheesy Pizza",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-            ),
-          ),
-          Container(
-            height: 310,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?cs=srgb&dl=pexels-brett-jordan-825661.jpg&fm=jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              alignment: Alignment.bottomLeft,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: HexColor("#000000")
-                      .withOpacity(0.4) //HexColor("#690000").withOpacity(0.35)
-                  ),
-              child: const Text(
-                "Super Cheesy Pizza",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-            ),
-          ),
-          Container(
-            height: 310,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/1049626/pexels-photo-1049626.jpeg?cs=srgb&dl=pexels-edward-eyer-1049626.jpg&fm=jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              alignment: Alignment.bottomLeft,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: HexColor("#000000")
-                      .withOpacity(0.4) //HexColor("#690000").withOpacity(0.35)
-                  ),
-              child: const Text(
-                "Super Cheesy Pizza",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-            ),
-          ),
-          Container(
-            height: 310,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/4193881/pexels-photo-4193881.jpeg?cs=srgb&dl=pexels-ponyo-sakana-4193881.jpg&fm=jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              alignment: Alignment.bottomLeft,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: HexColor("#000000")
-                      .withOpacity(0.4) //HexColor("#690000").withOpacity(0.35)
-                  ),
-              child: const Text(
-                "Super Cheesy Pizza",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-            ),
-          ),
-          Container(
-            height: 310,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/3761662/pexels-photo-3761662.jpeg?cs=srgb&dl=pexels-horizon-content-3761662.jpg&fm=jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              alignment: Alignment.bottomLeft,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: HexColor("#000000")
-                      .withOpacity(0.4) //HexColor("#690000").withOpacity(0.35)
-                  ),
-              child: const Text(
-                "Super Cheesy Pizza",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
-            ),
-          ),
-        ],
-      ),
+            );
+          }),
     );
   }
 
