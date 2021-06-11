@@ -10,7 +10,7 @@ List<Menu> menus = <Menu>[
       "https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1260968.jpg&fm=jpg"),
   const Menu('Hot Cheesy Pizza', "15",
       "https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1260968.jpg&fm=jpg"),
-  const Menu('Meatlover Pizza', "15",
+  const Menu('Meatlovers Pizza', "15",
       "https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1260968.jpg&fm=jpg"),
   const Menu('Uncle Special', "15",
       "https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1260968.jpg&fm=jpg"),
