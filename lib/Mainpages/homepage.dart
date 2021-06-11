@@ -52,6 +52,27 @@ class _HomepageState extends State<Homepage> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 100,
+      child: ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: promotions.length,
+          itemBuilder: (BuildContext context, int index) => Container(
+                margin: EdgeInsets.only(right: 10),
+                width: MediaQuery.of(context).size.width - 40,
+                height: 100,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(promotions[index].url),
+                        fit: BoxFit.cover),
+                    borderRadius: BorderRadius.circular(10)),
+              )),
+    );
+  }
+
+  promoBanner2() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 100,
       decoration: BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
@@ -104,7 +125,7 @@ class _HomepageState extends State<Homepage> {
 
   menu() {
     return Container(
-      height: 1000,
+      height: 1200,
       width: MediaQuery.of(context).size.width,
       child: GridView.builder(
           shrinkWrap: true,
