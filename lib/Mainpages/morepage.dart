@@ -17,7 +17,10 @@ class _MorepageState extends State<Morepage> {
         child: Column(
           children: <Widget>[
             FlatButton(
-                onPressed: () => {},
+                onPressed: () => {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MyProfile()))
+                    },
                 color: Colors.white,
                 child: Padding(
                     padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -88,6 +91,28 @@ class _MorepageState extends State<Morepage> {
           ],
         ),
       )),
+    );
+  }
+}
+
+class MyProfile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(
+          color: Colors.red,
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          "My Profile",
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      body: Center(
+        child: Text("No user information available"),
+      ),
     );
   }
 }
