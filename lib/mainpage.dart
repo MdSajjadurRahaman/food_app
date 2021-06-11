@@ -125,7 +125,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             Text(
-              "Connecting you to\nlot of services",
+              "Your best food app service!",
               textAlign: TextAlign.center,
             ),
             SizedBox(
