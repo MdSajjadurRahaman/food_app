@@ -66,31 +66,39 @@ class _MainPageState extends State<MainPage> {
             SalomonBottomBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: getPageIndex == 0 ? Colors.red : HexColor("#3C3C3C"),
+                  color: getPageIndex == 0
+                      ? Theme.of(context).accentColor
+                      : HexColor("#3C3C3C"),
                 ),
                 //unselectedColor: HexColor("#3C3C3C"),
-                selectedColor: Colors.red,
+                selectedColor: Theme.of(context).accentColor,
                 title: Text("Home")),
             SalomonBottomBarItem(
                 icon: Icon(
                   Icons.confirmation_number_rounded,
-                  color: getPageIndex == 1 ? Colors.red : HexColor("#3C3C3C"),
+                  color: getPageIndex == 1
+                      ? Theme.of(context).accentColor
+                      : HexColor("#3C3C3C"),
                 ),
-                selectedColor: Colors.red,
+                selectedColor: Theme.of(context).accentColor,
                 title: Text("Promo")),
             SalomonBottomBarItem(
                 icon: Icon(
                   Icons.history,
-                  color: getPageIndex == 2 ? Colors.red : HexColor("#3C3C3C"),
+                  color: getPageIndex == 2
+                      ? Theme.of(context).accentColor
+                      : HexColor("#3C3C3C"),
                 ),
-                selectedColor: Colors.red,
+                selectedColor: Theme.of(context).accentColor,
                 title: Text("Order")),
             SalomonBottomBarItem(
                 icon: Icon(
                   Icons.menu,
-                  color: getPageIndex == 3 ? Colors.red : HexColor("#3C3C3C"),
+                  color: getPageIndex == 3
+                      ? Theme.of(context).accentColor
+                      : HexColor("#3C3C3C"),
                 ),
-                selectedColor: Colors.red,
+                selectedColor: Theme.of(context).accentColor,
                 title: Text("More")),
           ],
         ),

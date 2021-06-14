@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-          primarySwatch: Colors.blue, scaffoldBackgroundColor: Colors.white),
+          accentColor: Colors.red,
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.white),
       home: SplashScreen(),
     );
   }
@@ -51,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      color: HexColor("#DB2129"),
+      color: Theme.of(context).accentColor,
       alignment: Alignment.center,
       child: Container(
         height: MediaQuery.of(context).size.height,

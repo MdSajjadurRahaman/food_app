@@ -21,7 +21,9 @@ class _HomepageState extends State<Homepage> {
             ),
             title: Text(
               'Deliver to',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).accentColor),
             ),
             subtitle: Text('Bangsar, Kuala Lumpur'),
             trailing: Icon(
@@ -193,8 +195,8 @@ class _HomepageState extends State<Homepage> {
               child: Row(
                 children: [
                   Icon(
-                    Icons.timer,
-                    color: Colors.red,
+                    Icons.motorcycle,
+                    color: Theme.of(context).accentColor,
                     size: 30,
                   ),
                   SizedBox(
@@ -206,7 +208,9 @@ class _HomepageState extends State<Homepage> {
                       Text(
                         'Deliver now in 25 min',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 15),
                       ),
                       Text(
                         '5 Km',
@@ -219,40 +223,44 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
             ),
-            Divider(
-              thickness: 2,
-            ),
+            Container(color: Colors.black12, height: 1),
             Container(
               padding:
                   EdgeInsets.only(top: 10, right: 10, left: 10, bottom: 15),
-              child: Row(
+              child: Column(
                 children: [
-                  Icon(
-                    Icons.confirmation_number_rounded,
-                    color: Colors.orange,
-                    size: 30,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
+                      Icon(
+                        Icons.confirmation_number_rounded,
+                        color: Colors.orange,
+                        size: 25,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
                       Text(
                         '20% OFF Self Pick up',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.orange),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        width: 200,
-                        color: Colors.orangeAccent,
-                        child: Text(
-                          "Check for available offers",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 15),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Text(
+                      "   Check for available offers",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),

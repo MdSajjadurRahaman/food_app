@@ -32,7 +32,8 @@ class _PromopageState extends State<Promopage> {
       height: 180,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          color: Colors.red, borderRadius: BorderRadius.circular(15)),
+          color: Theme.of(context).accentColor,
+          borderRadius: BorderRadius.circular(15)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -64,7 +65,7 @@ class _PromopageState extends State<Promopage> {
                     "browse\nrewards",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Colors.red,
+                        color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 12),
                   ),
@@ -109,7 +110,7 @@ class _PromopageState extends State<Promopage> {
                     "Share Now",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Colors.red,
+                        color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 12),
                   ),
@@ -130,12 +131,23 @@ class _PromopageState extends State<Promopage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Browse Promotions",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.black87),
+          Row(
+            children: [
+              Text(
+                "Browse Promotions",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.black87),
+              ),
+              Text(
+                "View all",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.black87),
+              ),
+            ],
           ),
           SizedBox(
             height: 10,
