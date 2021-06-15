@@ -79,18 +79,18 @@ class _PromopageState extends State<Promopage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  "Share with friends",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                Container(
+                  height: 50,
+                  child: Image(
+                    image: NetworkImage(
+                        "https://image.flaticon.com/icons/png/512/1141/1141031.png"),
+                  ),
                 ),
                 Text(
-                  "Share this app to your friends\nand get free RM10 discount\non your next order",
+                  "Share with friends and get discounts!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 10),
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 Text(
                   "Share left : 2 More friends",
@@ -132,6 +132,7 @@ class _PromopageState extends State<Promopage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Browse Promotions",
@@ -140,12 +141,18 @@ class _PromopageState extends State<Promopage> {
                     fontSize: 20,
                     color: Colors.black87),
               ),
-              Text(
-                "View all",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.black87),
+              Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black),
+                child: Text(
+                  "   View all   ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.white),
+                ),
               ),
             ],
           ),

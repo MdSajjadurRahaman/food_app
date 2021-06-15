@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/widgets/foodwidget.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -40,6 +41,7 @@ class _HomepageState extends State<Homepage> {
               children: [
                 promoBanner(),
                 searchbar(),
+                category(),
                 menu(),
               ],
             ),
@@ -71,17 +73,74 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  promoBanner2() {
+  category() {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 100,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: NetworkImage(
-                  "https://st4.depositphotos.com/14582236/30991/v/1600/depositphotos_309919246-stock-illustration-pepperoni-pizza-banner-ads.jpg"),
-              fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(10)),
-    );
+        margin: EdgeInsets.only(bottom: 15, top: 5),
+        width: MediaQuery.of(context).size.width,
+        height: 80,
+        child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: categories.length,
+            itemBuilder: (BuildContext context, int index) {
+              if (index == 0) {
+                return Row(
+                  children: [
+                    Container(
+                        margin: EdgeInsets.only(right: 10),
+                        width: 50,
+                        alignment: Alignment.center,
+                        height: 80,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Text(
+                          "View All",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        )),
+                    Container(
+                      margin: EdgeInsets.only(right: 10),
+                      width: 80,
+                      height: 80,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            height: 40,
+                            image: NetworkImage(categories[index].iconUrl),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(categories[index].category)
+                        ],
+                      ),
+                    )
+                  ],
+                );
+              } else {
+                return Container(
+                  margin: EdgeInsets.only(right: 10),
+                  width: 80,
+                  height: 80,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                        height: 40,
+                        image: NetworkImage(categories[index].iconUrl),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(categories[index].category)
+                    ],
+                  ),
+                );
+              }
+            }));
   }
 
   searchbar() {
@@ -136,31 +195,40 @@ class _HomepageState extends State<Homepage> {
               crossAxisSpacing: 10, mainAxisSpacing: 10, crossAxisCount: 2),
           itemCount: menus.length,
           itemBuilder: (BuildContext ctx, index) {
-            return Container(
-              height: 310,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                image: DecorationImage(
-                  image: NetworkImage(menus[index].url),
-                  fit: BoxFit.cover,
-                ),
-              ),
+            return GestureDetector(
+              onTap: () {
+                showFood(context,
+                    name: menus[index].name,
+                    price: menus[index].price,
+                    category: menus[index].category,
+                    url: menus[index].url);
+              },
               child: Container(
-                padding: EdgeInsets.all(15),
-                alignment: Alignment.bottomLeft,
+                height: 310,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: HexColor("#000000").withOpacity(
-                        0.4) //HexColor("#690000").withOpacity(0.35)
-                    ),
-                child: Text(
-                  menus[index].name, //sampledata
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
+                  borderRadius: BorderRadius.circular(15.0),
+                  image: DecorationImage(
+                    image: NetworkImage(menus[index].url),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  alignment: Alignment.bottomLeft,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      color: HexColor("#000000").withOpacity(
+                          0.4) //HexColor("#690000").withOpacity(0.35)
+                      ),
+                  child: Text(
+                    menus[index].name, //sampledata
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
                 ),
               ),
             );
@@ -269,5 +337,15 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
     );
+  }
+
+  showFood(BuildContext context,
+      {required String name,
+      required String price,
+      required String category,
+      required String url}) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return Food(name: name, price: price, category: category, url: url);
+    }));
   }
 }
