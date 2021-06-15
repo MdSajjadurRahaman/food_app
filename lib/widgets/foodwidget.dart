@@ -68,7 +68,7 @@ class _FoodState extends State<Food> {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pop(context, ["a", "b", 2]);
             },
             child: Container(
               height: 50,

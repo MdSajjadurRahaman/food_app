@@ -16,6 +16,7 @@ class _MainPageState extends State<MainPage> {
   bool isSignedIn = false;
   PageController pageController = PageController(initialPage: 0);
   int getPageIndex = 0;
+  bool isCartfilled = true;
 
   onTapChangePage(int pageIndex) {
     pageController.jumpToPage(pageIndex);
@@ -55,6 +56,29 @@ class _MainPageState extends State<MainPage> {
         onPageChanged: whenPageChanges,
         physics: NeverScrollableScrollPhysics(),
       ),
+      floatingActionButton: isCartfilled
+          ? Stack(
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    // Add your onPressed code here!
+                  },
+                  child: const Icon(Icons.shopping_cart_rounded),
+                  backgroundColor: Colors.red,
+                ),
+                Positioned(
+                  right: 5,
+                  child: Container(
+                    height: 15,
+                    width: 15,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.orangeAccent),
+                  ),
+                )
+              ],
+            )
+          : Container(),
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(left: 10, right: 10),
         //color: Colors.black,

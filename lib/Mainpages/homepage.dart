@@ -35,17 +35,12 @@ class _HomepageState extends State<Homepage> {
           )),
       body: Container(
         padding: EdgeInsets.only(left: 20, right: 20),
-        child: Stack(
+        child: ListView(
           children: [
-            ListView(
-              children: [
-                promoBanner(),
-                searchbar(),
-                category(),
-                menu(),
-              ],
-            ),
-            bottomWidget(),
+            promoBanner(),
+            searchbar(),
+            category(),
+            menu(),
           ],
         ),
       ),
@@ -343,9 +338,22 @@ class _HomepageState extends State<Homepage> {
       {required String name,
       required String price,
       required String category,
-      required String url}) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      required String url}) async {
+    final input =
+        await Navigator.push(context, MaterialPageRoute(builder: (context) {
       return Food(name: name, price: price, category: category, url: url);
     }));
+
+    final addCart = Cart(
+      input[0],
+      input[1],
+      input[2],
+    );
+
+    setState(() {
+      cart.add(addCart);
+      print(cart.length);
+      print(cart.toString());
+    });
   }
 }
