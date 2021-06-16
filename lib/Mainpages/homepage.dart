@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/Secondarypages/checkout.dart';
 import 'package:food_app/widgets/foodwidget.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
@@ -44,6 +45,32 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
+      floatingActionButton: cart.length > 0
+          ? Stack(
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Checkout()),
+                    );
+                  },
+                  child: const Icon(Icons.shopping_cart_rounded),
+                  backgroundColor: Colors.red,
+                ),
+                Positioned(
+                  right: 5,
+                  child: Container(
+                    height: 15,
+                    width: 15,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.orangeAccent),
+                  ),
+                )
+              ],
+            )
+          : Container(),
     );
   }
 
@@ -193,6 +220,7 @@ class _HomepageState extends State<Homepage> {
             return GestureDetector(
               onTap: () {
                 showFood(context,
+                    id: menus[index].id,
                     name: menus[index].name,
                     price: menus[index].price,
                     category: menus[index].category,
@@ -335,25 +363,34 @@ class _HomepageState extends State<Homepage> {
   }
 
   showFood(BuildContext context,
-      {required String name,
-      required String price,
+      {required String id,
+      required String name,
+      required double price,
       required String category,
       required String url}) async {
     final input =
         await Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return Food(name: name, price: price, category: category, url: url);
+      return Food(
+        id: id,
+        name: name,
+        price: price,
+        category: category,
+        url: url,
+      );
     }));
-
-    final addCart = Cart(
-      input[0],
-      input[1],
-      input[2],
-    );
-
-    setState(() {
-      cart.add(addCart);
-      print(cart.length);
-      print(cart.toString());
-    });
+    final addCart;
+    if (input != null) {
+      addCart = Cart(
+        input[0],
+        input[1],
+        input[2],
+        input[3],
+        input[4],
+      );
+      setState(() {
+        cart.add(addCart);
+        print(cart.length);
+      });
+    }
   }
 }

@@ -3,12 +3,14 @@ import 'package:food_app/widgets/sampledata.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Food extends StatefulWidget {
+  final String id;
   final String name;
-  final String price;
+  final double price;
   final String url;
   final String category;
 
   Food({
+    required this.id,
     required this.name,
     required this.price,
     required this.category,
@@ -17,6 +19,7 @@ class Food extends StatefulWidget {
 
   @override
   _FoodState createState() => _FoodState(
+        id: this.id,
         name: this.name,
         price: this.price,
         category: this.category,
@@ -25,12 +28,14 @@ class Food extends StatefulWidget {
 }
 
 class _FoodState extends State<Food> {
+  final String id;
   final String name;
-  final String price;
+  final double price;
   final String url;
   final String category;
 
   _FoodState({
+    required this.id,
     required this.name,
     required this.price,
     required this.category,
@@ -68,7 +73,7 @@ class _FoodState extends State<Food> {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.pop(context, ["a", "b", 2]);
+              Navigator.pop(context);
             },
             child: Container(
               height: 50,
@@ -132,7 +137,7 @@ class _FoodState extends State<Food> {
                 ),
               ),
               Text(
-                "MYR" + price,
+                "MYR" + price.toString(),
                 style: TextStyle(fontWeight: FontWeight.w300, fontSize: 25),
               ),
             ],
@@ -163,18 +168,23 @@ class _FoodState extends State<Food> {
   }
 
   addToCart() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 50,
-      margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
-      decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
-          borderRadius: BorderRadius.circular(15)),
-      alignment: Alignment.center,
-      child: Text(
-        "add to cart",
-        style: TextStyle(
-            fontWeight: FontWeight.w800, fontSize: 15, color: Colors.white),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context, [id, name, 1, price, url]);
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 50,
+        margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        decoration: BoxDecoration(
+            color: Theme.of(context).accentColor,
+            borderRadius: BorderRadius.circular(15)),
+        alignment: Alignment.center,
+        child: Text(
+          "add to cart",
+          style: TextStyle(
+              fontWeight: FontWeight.w800, fontSize: 15, color: Colors.white),
+        ),
       ),
     );
   }
