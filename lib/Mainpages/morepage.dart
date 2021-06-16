@@ -45,64 +45,71 @@ class MyProfile extends StatelessWidget {
         ),
         body: Center(
             child: Container(
+                margin: EdgeInsets.all(10.0),
                 child: Column(
-          children: [
-            SizedBox(
-              height: 5,
-            ),
-            profilPic(),
-            SizedBox(height: 30),
-            buildTextField("Full Name", profiles[0].user, false),
-            buildTextField("Phone Number", profiles[0].phone, false),
-            buildTextField("Email", profiles[0].email, false),
-            buildTextField("Location", profiles[0].location, false),
-            SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                OutlinedButton(
-                  onPressed: () => {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Morepage()))
-                  },
-                  child: Text("CANCEL",
-                      style: TextStyle(
-                          fontSize: 15, letterSpacing: 2, color: Colors.red)),
-                  style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                ),
-                ElevatedButton(
-                  onPressed: () => {},
-                  child: Text("SAVE",
-                      style: TextStyle(
-                          fontSize: 15, letterSpacing: 2, color: Colors.white)),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            ElevatedButton.icon(
-              onPressed: () => {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MainPage()))
-              },
-              icon: Icon(Icons.close),
-              label: Text("Sign Out"),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red,
-              ),
-            ),
-          ],
-        ))));
+                  children: [
+                    SizedBox(
+                      height: 5,
+                    ),
+                    profilPic(),
+                    SizedBox(height: 30),
+                    buildTextField("Full Name", profiles[0].user, false),
+                    buildTextField("Phone Number", profiles[0].phone, false),
+                    buildTextField("Email", profiles[0].email, false),
+                    buildTextField("Location", profiles[0].location, false),
+                    SizedBox(height: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Morepage()))
+                          },
+                          child: Text("CANCEL",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  letterSpacing: 2,
+                                  color: Colors.red)),
+                          style: OutlinedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(horizontal: 50),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => {},
+                          child: Text("SAVE",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  letterSpacing: 2,
+                                  color: Colors.white)),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.blue,
+                            padding: EdgeInsets.symmetric(horizontal: 50),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () => {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => MainPage()))
+                      },
+                      icon: Icon(Icons.close),
+                      label: Text("Sign Out"),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                      ),
+                    ),
+                  ],
+                ))));
   }
 
   Widget buildTextField(
