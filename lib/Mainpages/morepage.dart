@@ -43,7 +43,8 @@ class MyProfile extends StatelessWidget {
           ),
           elevation: 0,
         ),
-        body: Column(
+        body: Container(
+            child: Column(
           children: [
             SizedBox(
               height: 5,
@@ -100,7 +101,7 @@ class MyProfile extends StatelessWidget {
               ),
             ),
           ],
-        ));
+        )));
   }
 
   Widget buildTextField(
