@@ -19,10 +19,25 @@ class _MorepageState extends State<Morepage> {
   }
 }
 
-class NoMyProfile extends StatelessWidget {
+// ignore: camel_case_types
+class inbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(color: Colors.red),
+        backgroundColor: Colors.white,
+        title: Text(
+          "Inbox",
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.black),
+        ),
+        elevation: 0,
+      ),
+      body: Center(
+        child: Text("No message available"),
+      ),
+    );
   }
 }
 
@@ -45,7 +60,7 @@ class MyProfile extends StatelessWidget {
         ),
         body: Center(
             child: Container(
-                margin: EdgeInsets.all(10.0),
+                margin: EdgeInsets.all(12.0),
                 child: Column(
                   children: [
                     SizedBox(
@@ -62,12 +77,7 @@ class MyProfile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         OutlinedButton(
-                          onPressed: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Morepage()))
-                          },
+                          onPressed: () => {Navigator.pop(context)},
                           child: Text("CANCEL",
                               style: TextStyle(
                                   fontSize: 15,
@@ -119,14 +129,6 @@ class MyProfile extends StatelessWidget {
       child: TextField(
         obscureText: isPasswordTextField ? isObscurePassword : false,
         decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-                    onPressed: () => {},
-                    icon: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.grey,
-                    ))
-                : null,
             contentPadding: EdgeInsets.only(bottom: 5),
             labelText: labelText,
             floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -172,7 +174,10 @@ class tombol extends StatelessWidget {
                     ],
                   ))),
           FlatButton(
-              onPressed: () => {},
+              onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => inbox()))
+                  },
               color: Colors.white,
               child: Padding(
                   padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
