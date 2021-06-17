@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/Tertiarypages/paymentpage.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:uuid/uuid.dart';
 
 class Checkout extends StatefulWidget {
   @override
@@ -19,82 +21,68 @@ class _CheckoutState extends State<Checkout> {
       appBar:
           appbar(context, strTitle: "Checkout", disappearedBackButton: false),
       body: Container(
-        padding: EdgeInsets.all(30),
+        padding: EdgeInsets.symmetric(horizontal: 30),
         alignment: Alignment.center,
         child: ListView(
-          children: [
-            cartList(),
-            SizedBox(
-              height: 20,
-            ),
-            checkoutDetails()
-          ],
+          children: [cartList(), checkoutDetails()],
         ),
       ),
     );
   }
 
   cartList() {
-    print(cart.length);
     return Container(
-      height: 250,
-      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(vertical: 20),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15), color: Colors.white),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: cart.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.all(0),
-                      leading: Container(
-                        height: 100,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: NetworkImage(cart[index].url),
-                            fit: BoxFit.cover,
-                          ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            itemCount: cart.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Column(
+                children: [
+                  ListTile(
+                    contentPadding: EdgeInsets.all(0),
+                    leading: Container(
+                      height: 40,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: NetworkImage(cart[index].url),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(cart[index].name,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 15,
-                                  color: Colors.black)),
-                          Text("rm" + cart[index].price.toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  color: Theme.of(context).accentColor)),
-                        ],
-                      ),
-                      trailing: Text(cart[index].quantity.toString(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15,
-                              color: Colors.black)),
                     ),
-                    Divider(),
-                  ],
-                );
-              },
-            ),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                            cart[index].quantity.toString() +
+                                "x " +
+                                cart[index].name,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15,
+                                color: Colors.black)),
+                      ],
+                    ),
+                    trailing: Text("RM" + cart[index].price.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 15,
+                            color: Theme.of(context).accentColor)),
+                  ),
+                  Divider(),
+                ],
+              );
+            },
           ),
           Container(
             //margin: EdgeInsets.symmetric(vertical: 10),
@@ -151,40 +139,51 @@ class _CheckoutState extends State<Checkout> {
           ),
           Text(
             "+ delivery fee RM5",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal,),
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: Colors.black45),
           ),
           Text(
             "+ service fee RM2",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal,),
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: Colors.black45),
           ),
           Text(
             "RM " + total.toString(),
             style: TextStyle(fontSize: 54, fontWeight: FontWeight.bold),
           ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            height: 40,
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width / 2,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.red,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Proceed to payment",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                Icon(
-                  Icons.chevron_right_outlined,
-                  color: Colors.white,
-                )
-              ],
+          GestureDetector(
+            onTap: () {
+              gotoPayment(context);
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              height: 40,
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width / 2,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.red,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Proceed to payment",
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  Icon(
+                    Icons.chevron_right_outlined,
+                    color: Colors.white,
+                  )
+                ],
+              ),
             ),
           )
         ],
@@ -216,6 +215,36 @@ class _CheckoutState extends State<Checkout> {
     total = 0.0;
     for (int i = 0; i < cart.length; i++) {
       total += cart[i].price;
+    }
+  }
+
+  gotoPayment(
+    BuildContext context,
+  ) async {
+    final bool success =
+        await Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return Paymentpage(total: total);
+    }));
+    final addOrder;
+    if (success) {
+      var orderId = Uuid().v4();
+      addOrder = Order(
+        orderId,
+        "test@mail.com",
+        0,
+        cart,
+        0,
+        "Bangsar, Kuala Lumpur",
+        DateTime.now(),
+        0,
+      );
+      setState(() {
+        order.add(addOrder);
+        print(order.length);
+        print(order[0].cart[0].name);
+        cart.clear();
+        Navigator.pop(context);
+      });
     }
   }
 }

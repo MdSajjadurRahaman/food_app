@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/Secondarypages/sharingpage.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
 
@@ -99,20 +100,28 @@ class _PromopageState extends State<Promopage> {
                       color: Colors.white,
                       fontSize: 10),
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5)),
-                  padding:
-                      EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-                  child: Text(
-                    "Share Now",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Theme.of(context).accentColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Sharingpage()),
+                    );
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5)),
+                    padding:
+                        EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                    child: Text(
+                      "Share Now",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12),
+                    ),
                   ),
                 )
               ],

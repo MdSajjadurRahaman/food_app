@@ -1,3 +1,5 @@
+import 'package:food_app/widgets/foodwidget.dart';
+
 class Cart {
   const Cart(this.foodId, this.name, this.quantity, this.price, this.url);
   final String foodId;
@@ -37,7 +39,30 @@ class Profile {
   final location;
 }
 
+class Order {
+  const Order(this.orderId, this.customerEmail, this.status, this.cart,
+      this.via, this.location, this.time, this.paymentMethod);
+  final String orderId;
+  final String customerEmail;
+  final int status;
+  final List<Cart> cart;
+  final int via;
+  final String location;
+  final DateTime time;
+  final int paymentMethod;
+}
+
+class FoodList {
+  const FoodList(this.foodId, this.name, this.url, this.quantity);
+  final String foodId;
+  final String name;
+  final String url;
+  final int quantity;
+}
+
 List<Cart> cart = <Cart>[];
+List<Order> order = <Order>[];
+//List<FoodList> foodList = <FoodList>[];
 
 List<Profile> profiles = <Profile>[
   const Profile(
