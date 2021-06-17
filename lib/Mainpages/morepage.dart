@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/mainpage.dart';
 import 'package:food_app/widgets/sampledata.dart';
+import 'package:food_app/widgets/tabheaderwidget.dart';
 
 class Morepage extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _MorepageState extends State<Morepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appbar(context, strTitle: "Hi, Jone Doe"),
+      appBar: appbar(context, strTitle: "Hi, " + profiles[0].user),
       body: tombol(),
     );
   }
@@ -41,8 +42,7 @@ class inbox extends StatelessWidget {
   }
 }
 
-class MyProfile extends StatelessWidget {
-  bool isObscurePassword = true;
+class NoProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,10 +68,71 @@ class MyProfile extends StatelessWidget {
                     ),
                     profilPic(),
                     SizedBox(height: 30),
-                    buildTextField("Full Name", profiles[0].user, false),
-                    buildTextField("Phone Number", profiles[0].phone, false),
-                    buildTextField("Email", profiles[0].email, false),
-                    buildTextField("Location", profiles[0].location, false),
+                    Text(
+                      profiles[0].user,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 15),
+                    ElevatedButton(
+                      onPressed: () => {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyProfile()))
+                      },
+                      child: Text("Edit My Profile",
+                          style: TextStyle(
+                              fontSize: 15,
+                              letterSpacing: 2,
+                              color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue,
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () => {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => MainPage()))
+                      },
+                      icon: Icon(Icons.close),
+                      label: Text("Sign Out"),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                      ),
+                    ),
+                  ],
+                ))));
+  }
+}
+
+class MyProfile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: appbar(context, strTitle: "Edit my profile"),
+        body: Center(
+            child: Container(
+                margin: EdgeInsets.all(12.0),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 5,
+                    ),
+                    profilPic(),
+                    SizedBox(height: 30),
+                    buildTextField("Full Name", profiles[0].user),
+                    buildTextField("Phone Number", profiles[0].phone),
+                    buildTextField("Email", profiles[0].email),
+                    buildTextField("Location", profiles[0].location),
                     SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,38 +168,16 @@ class MyProfile extends StatelessWidget {
                     SizedBox(
                       height: 12,
                     ),
-                    ElevatedButton.icon(
-                      onPressed: () => {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MainPage()))
-                      },
-                      icon: Icon(Icons.close),
-                      label: Text("Sign Out"),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                      ),
-                    ),
                   ],
                 ))));
   }
 
-  Widget buildTextField(
-      String labelText, placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 30),
-      child: TextField(
-        obscureText: isPasswordTextField ? isObscurePassword : false,
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(bottom: 5),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
-            )),
-      ),
+  Widget buildTextField(String labelText, hintText) {
+    return TextField(
+      decoration: InputDecoration(
+          border: UnderlineInputBorder(),
+          hintText: hintText,
+          labelText: labelText),
     );
   }
 }
@@ -155,7 +194,7 @@ class tombol extends StatelessWidget {
           FlatButton(
               onPressed: () => {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MyProfile()))
+                        MaterialPageRoute(builder: (context) => NoProfile()))
                   },
               color: Colors.white,
               child: Padding(
