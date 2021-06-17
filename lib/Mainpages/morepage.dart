@@ -43,6 +43,31 @@ class inbox extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
+class help extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(color: Colors.red),
+        backgroundColor: Colors.white,
+        title: Text(
+          "Help",
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.black),
+        ),
+        elevation: 0,
+      ),
+      body: Center(
+        child: Text(
+          "For help please go to www.huacomm.com.my \n or \n call +601472583697",
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+}
+
 class NoProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -275,7 +300,10 @@ class tombol extends StatelessWidget {
                         )
                       ]))),
           FlatButton(
-              onPressed: () => {},
+              onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => help()))
+                  },
               color: Colors.white,
               child: Padding(
                   padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
