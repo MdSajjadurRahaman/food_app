@@ -41,7 +41,7 @@ List<Cart> cart = <Cart>[];
 
 List<Profile> profiles = <Profile>[
   const Profile(
-      "Jone Doe", "joe.doe@gmail.com", "+601119996665", "Kuala Lumpur"),
+      "John Doe", "joe.doe@gmail.com", "+601119996665", "Kuala Lumpur"),
 ];
 
 List<Menu> menus = <Menu>[

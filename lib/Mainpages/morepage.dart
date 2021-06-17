@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/Mainpages/feedback.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/mainpage.dart';
 import 'package:food_app/widgets/sampledata.dart';
@@ -46,71 +47,91 @@ class NoProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: BackButton(
-            color: Colors.red,
-          ),
-          backgroundColor: Colors.white,
-          title: Text(
-            "My Account",
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.black),
-          ),
-          elevation: 0,
+      appBar: AppBar(
+        leading: BackButton(
+          color: Colors.red,
         ),
-        body: Center(
-            child: Container(
-                margin: EdgeInsets.all(12.0),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 5,
-                    ),
-                    profilPic(),
-                    SizedBox(height: 30),
-                    Text(
-                      profiles[0].user,
+        backgroundColor: Colors.white,
+        title: Text(
+          "My Account",
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.black),
+        ),
+        elevation: 0,
+      ),
+      body: Container(
+          margin: EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 5,
+              ),
+              Center(
+                child: profilPic(),
+              ),
+              SizedBox(height: 30),
+              Text(
+                profiles[0].user,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 15),
+              buildTextnoField("Full Name", profiles[0].user),
+              buildTextnoField("Email", profiles[0].email),
+              buildTextnoField("Phone Number", profiles[0].phone),
+              buildTextnoField("Location", profiles[0].location),
+              SizedBox(height: 15),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyProfile()))
+                  },
+                  child: Text("Edit My Profile",
                       style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 15),
-                    ElevatedButton(
-                      onPressed: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyProfile()))
-                      },
-                      child: Text("Edit My Profile",
-                          style: TextStyle(
-                              fontSize: 15,
-                              letterSpacing: 2,
-                              color: Colors.white)),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: () => {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MainPage()))
-                      },
-                      icon: Icon(Icons.close),
-                      label: Text("Sign Out"),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                      ),
-                    ),
-                  ],
-                ))));
+                          fontSize: 15, letterSpacing: 2, color: Colors.blue)),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              ElevatedButton.icon(
+                onPressed: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MainPage()))
+                },
+                icon: Icon(Icons.close),
+                label: Text("Sign Out"),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                ),
+              ),
+            ],
+          )),
+    );
+  }
+
+  Widget buildTextnoField(String labelText, hintText) {
+    return TextField(
+      enabled: false,
+      decoration: InputDecoration(
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          border: UnderlineInputBorder(),
+          hintStyle:
+              TextStyle(fontWeight: FontWeight.normal, color: Colors.black),
+          hintText: hintText,
+          labelStyle: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 24.0),
+          labelText: labelText),
+    );
   }
 }
 
@@ -175,6 +196,7 @@ class MyProfile extends StatelessWidget {
   Widget buildTextField(String labelText, hintText) {
     return TextField(
       decoration: InputDecoration(
+          floatingLabelBehavior: FloatingLabelBehavior.always,
           border: UnderlineInputBorder(),
           hintText: hintText,
           labelText: labelText),
@@ -233,7 +255,10 @@ class tombol extends StatelessWidget {
                         )
                       ]))),
           FlatButton(
-              onPressed: () => {},
+              onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => FeedBack()))
+                  },
               color: Colors.white,
               child: Padding(
                   padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -288,8 +313,8 @@ class profilPic extends StatelessWidget {
         overflow: Overflow.visible,
         children: [
           CircleAvatar(
-            backgroundColor: Colors.grey,
-            backgroundImage: AssetImage("assets/images/google.png"),
+            backgroundColor: Theme.of(context).accentColor,
+            backgroundImage: AssetImage("assets/images/logo2.png"),
           ),
           Positioned(
               right: -12,

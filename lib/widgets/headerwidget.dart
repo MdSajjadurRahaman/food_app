@@ -52,3 +52,13 @@ PreferredSize appbar(context,
         elevation: 0,
       ));
 }
+
+Widget buildTextField(String labelText, hintText) {
+  return TextField(
+    decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        border: UnderlineInputBorder(),
+        hintText: hintText,
+        labelText: labelText),
+  );
+}
