@@ -4,6 +4,7 @@ import 'package:food_app/Mainpages/menupage.dart';
 import 'package:food_app/Mainpages/morepage.dart';
 import 'package:food_app/Mainpages/orderpage.dart';
 import 'package:food_app/Mainpages/promopage.dart';
+import 'package:food_app/widgets/loginMan.dart';
 import 'package:food_app/widgets/sampledata.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -112,6 +113,15 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.4),
+          image: DecorationImage(
+              image: NetworkImage(
+                  "https://images.pexels.com/photos/3343624/pexels-photo-3343624.jpeg?crop=entropy&cs=srgb&dl=pexels-arthur-brognoli-3343624.jpg&fit=crop&fm=jpg&h=959&w=640"),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.4), BlendMode.dstATop)),
+        ),
         padding: EdgeInsets.all(30),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -126,45 +136,90 @@ class _MainPageState extends State<MainPage> {
                 fit: BoxFit.fitHeight,
               ),
             ),
+            SizedBox(
+              height: 50,
+            ),
+            SizedBox(
+              height: 40,
+            ),
             Text(
-              "Your best food app service!",
+              "The best food app in town!",
               textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 20,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal),
             ),
             Text(
-              "Sign In",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat convallis cras vel rhoncus fringilla.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w200),
             ),
-            SizedBox(
-              height: 20,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => loginMan()));
+              },
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  height: 57,
+                  width: 293,
+                  decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(width: 2, color: Colors.red)),
+                  child: Center(
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  )),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  height: 57,
+                  width: 293,
+                  decoration: BoxDecoration(
+                      color: Color(0x00000000),
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(width: 2, color: Colors.red)),
+                  child: Center(
+                    child: Text(
+                      "Register",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  )),
+            ),
+            Text(
+              "Or, Login with",
+              style: TextStyle(color: Colors.white),
             ),
             GestureDetector(
               onTap: () {
                 loggedIn();
               },
               child: Container(
-                padding: EdgeInsets.all(15),
+                padding: EdgeInsets.all(8),
                 height: 60,
-                width: 220,
+                width: 60,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    border: Border.all(width: 2, color: Colors.black12)),
+                    border: Border.all(width: 2, color: Color(0x00000000))),
                 child: Row(
                   children: [
                     Image.asset("assets/images/google.png"),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("Sign in with Google"),
                   ],
                 ),
               ),
-            ),
-            Text("dont have google account ?"),
-            SizedBox(
-              height: 30,
             ),
           ],
         ),
