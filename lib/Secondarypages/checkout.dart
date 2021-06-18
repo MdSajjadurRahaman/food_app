@@ -12,7 +12,8 @@ class Checkout extends StatefulWidget {
 
 class _CheckoutState extends State<Checkout> {
   double total = 0.0;
-
+  bool usePromo = false;
+  var _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     countTotal();
@@ -32,7 +33,7 @@ class _CheckoutState extends State<Checkout> {
 
   cartList() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
+      margin: EdgeInsets.only(top: 20, bottom: 20),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15), color: Colors.white),
@@ -122,6 +123,43 @@ class _CheckoutState extends State<Checkout> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          usePromo
+              ? Text("Promo used : " + _controller.text)
+              : Container(
+                  decoration: BoxDecoration(
+                    color: HexColor("#EFEFEF"),
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: Container(
+                      //margin: EdgeInsets.symmetric(vertical: 10),
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: HexColor("#EFEFEF"),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: TextField(
+                        controller: _controller,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Enter Promocode..',
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                          isDense: true,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              promoChecK();
+                            },
+                            icon: Icon(Icons.chevron_right_outlined),
+                          ),
+                        ),
+                        style: TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500),
+                      ))),
+          SizedBox(
+            height: 10,
+          ),
           _listtile(Icons.motorcycle, Colors.red, "Delivery", "edit"),
           _listtile(
               Icons.location_pin, Colors.blue, "Bangsar, Kuala Lumpur", "edit"),
@@ -142,7 +180,10 @@ class _CheckoutState extends State<Checkout> {
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
-                color: Colors.black45),
+                color: Colors.black45,
+                decoration:
+                    usePromo ? TextDecoration.lineThrough : TextDecoration.none,
+                decorationThickness: 2.85),
           ),
           Text(
             "+ service fee RM2",
@@ -189,6 +230,27 @@ class _CheckoutState extends State<Checkout> {
         ],
       ),
     );
+  }
+
+  promoChecK() {
+    print(total);
+    var contain = promotions.where(
+      (element) => element.promoCode == _controller.text,
+    );
+    if (contain.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Thank you for using our promo"),
+      ));
+      setState(() {
+        total = total - 5;
+        usePromo = true;
+        print(total);
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("No Promo Found with code : " + _controller.text),
+      ));
+    }
   }
 
   ListTile _listtile(IconData icon, Color color, String title, String trail) {

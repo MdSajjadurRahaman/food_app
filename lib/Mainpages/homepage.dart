@@ -389,8 +389,7 @@ class _HomepageState extends State<Homepage> {
         cart[cart.indexWhere((element) => element.foodId == input[0])]
             .quantity++;
         cart[cart.indexWhere((element) => element.foodId == input[0])].price =
-            cart[cart.indexWhere((element) => element.foodId == input[0])]
-                    .price *
+            menus[menus.indexWhere((element) => element.id == input[0])].price *
                 cart[cart.indexWhere((element) => element.foodId == input[0])]
                     .quantity;
       } else {

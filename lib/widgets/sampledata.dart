@@ -25,10 +25,12 @@ class Menu {
 }
 
 class Promotion {
-  const Promotion(this.status, this.promoCode, this.url);
-  final bool status;
-  final String promoCode;
-  final String url;
+  Promotion(this.id, this.name, this.status, this.promoCode, this.url);
+  String id;
+  String name;
+  bool status;
+  String promoCode;
+  String url;
 }
 
 class Profile {
@@ -156,15 +158,15 @@ List<Category> categories = <Category>[
 ];
 
 List<Promotion> promotions = <Promotion>[
-  const Promotion(true, "GIVEMEFREE",
+  Promotion("PROMO1", "10% DISC", true, "GIVEMEFREE",
       "https://st4.depositphotos.com/14582236/30991/v/1600/depositphotos_309919246-stock-illustration-pepperoni-pizza-banner-ads.jpg"),
-  const Promotion(true, "PLSDISCOUNT",
+  Promotion("PROMO2", "CARBONARA SPC", true, "PLSDISCOUNT",
       "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/carbonara-pasta-facebook-post-design-template-3e059d5101c90c93dd452e87653e0d14.jpg?ts=1583940267"),
-  const Promotion(true, "YUMPASTA",
+  Promotion("PROMO3", "PASTA DAY", true, "YUMPASTA",
       "https://madeinsingaporelah.com/wp-content/uploads/2018/10/1-for-1-Pasta.jpg"),
-  const Promotion(false, "THANKYOU",
+  Promotion("PROMO4", "FREE DELIVERY", false, "THANKYOU",
       "https://image.freepik.com/free-vector/order-now-online-delivery-you-stay-home-we-deliver-banner-design_262129-1293.jpg"),
-  const Promotion(false, "ONEMOREORDER",
+  Promotion("PROMO5", "PASTA DAY", false, "ONEMOREORDER",
       "https://madeinsingaporelah.com/wp-content/uploads/2018/10/1-for-1-Pasta.jpg"),
 ];
 

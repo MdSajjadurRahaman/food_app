@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Secondarypages/sharingpage.dart';
 import 'package:food_app/widgets/headerwidget.dart';
+import 'package:food_app/widgets/promowidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
 
 class Promopage extends StatefulWidget {
@@ -172,34 +173,45 @@ class _PromopageState extends State<Promopage> {
               child: ListView.builder(
             shrinkWrap: true,
             itemCount: promotions.length,
-            itemBuilder: (BuildContext context, int index) => Container(
-              height: 150,
-              margin: EdgeInsets.only(bottom: 10),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                image: DecorationImage(
-                  image: NetworkImage(promotions[index].url),
-                  fit: BoxFit.cover,
-                ),
-              ),
+            itemBuilder: (BuildContext context, int index) => GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Promowidget(
+                            id: promotions[index].id,
+                          )),
+                );
+              },
               child: Container(
-                padding: EdgeInsets.all(15),
-                alignment: Alignment.center,
+                height: 150,
+                margin: EdgeInsets.only(bottom: 10),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: promotions[index].status
-                        ? Colors.black.withOpacity(0)
-                        : Colors.black.withOpacity(
-                            0.4) //HexColor("#690000").withOpacity(0.35)
-                    ),
-                child: Text(
-                  promotions[index].status ? "" : "EXPIRED",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 36),
+                  borderRadius: BorderRadius.circular(15.0),
+                  image: DecorationImage(
+                    image: NetworkImage(promotions[index].url),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      color: promotions[index].status
+                          ? Colors.black.withOpacity(0)
+                          : Colors.black.withOpacity(
+                              0.4) //HexColor("#690000").withOpacity(0.35)
+                      ),
+                  child: Text(
+                    promotions[index].status ? "" : "EXPIRED",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 36),
+                  ),
                 ),
               ),
             ),
