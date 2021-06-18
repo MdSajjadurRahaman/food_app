@@ -1,12 +1,12 @@
 import 'package:food_app/widgets/foodwidget.dart';
 
 class Cart {
-  const Cart(this.foodId, this.name, this.quantity, this.price, this.url);
-  final String foodId;
-  final String name;
-  final int quantity;
-  final double price;
-  final String url;
+  Cart(this.foodId, this.name, this.quantity, this.price, this.url);
+  String foodId;
+  String name;
+  int quantity;
+  double price;
+  String url;
 }
 
 class Category {

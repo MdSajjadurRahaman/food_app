@@ -216,17 +216,18 @@ class _CheckoutState extends State<Checkout> {
     for (int i = 0; i < cart.length; i++) {
       total += cart[i].price;
     }
+    total = total + 7;
   }
 
   gotoPayment(
     BuildContext context,
   ) async {
-    final bool success =
+    final success =
         await Navigator.push(context, MaterialPageRoute(builder: (context) {
       return Paymentpage(total: total);
     }));
     final addOrder;
-    if (success) {
+    if (success != null) {
       var orderId = Uuid().v4();
       addOrder = Order(
         orderId,
@@ -245,6 +246,8 @@ class _CheckoutState extends State<Checkout> {
         cart.clear();
         Navigator.pop(context);
       });
+    } else {
+      print("payment_fail");
     }
   }
 }

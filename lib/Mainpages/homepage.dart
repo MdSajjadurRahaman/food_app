@@ -379,18 +379,33 @@ class _HomepageState extends State<Homepage> {
       );
     }));
     final addCart;
+
     if (input != null) {
-      addCart = Cart(
-        input[0],
-        input[1],
-        input[2],
-        input[3],
-        input[4],
+      var contain = cart.where(
+        (element) => element.foodId == input[0],
       );
-      setState(() {
-        cart.add(addCart);
-        print(cart.length);
-      });
+      if (contain.isNotEmpty) {
+        print("hiyahiya");
+        cart[cart.indexWhere((element) => element.foodId == input[0])]
+            .quantity++;
+        cart[cart.indexWhere((element) => element.foodId == input[0])].price =
+            cart[cart.indexWhere((element) => element.foodId == input[0])]
+                    .price *
+                cart[cart.indexWhere((element) => element.foodId == input[0])]
+                    .quantity;
+      } else {
+        addCart = Cart(
+          input[0],
+          input[1],
+          input[2],
+          input[3],
+          input[4],
+        );
+        setState(() {
+          cart.add(addCart);
+          print(cart.length);
+        });
+      }
     }
   }
 }
