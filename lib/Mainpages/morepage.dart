@@ -85,14 +85,27 @@ class NoProfile extends StatelessWidget {
         elevation: 0,
       ),
       body: Container(
-          margin: EdgeInsets.all(10.0),
+          margin: EdgeInsets.all(20.0),
           child: Column(
             children: [
               SizedBox(
                 height: 5,
               ),
               Center(
-                child: profilPic(),
+                child: SizedBox(
+                  height: 115,
+                  width: 115,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    overflow: Overflow.visible,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Theme.of(context).accentColor,
+                        backgroundImage: AssetImage("assets/images/logo2.png"),
+                      )
+                    ],
+                  ),
+                ),
               ),
               SizedBox(height: 30),
               Text(
@@ -168,7 +181,7 @@ class MyProfile extends StatelessWidget {
         body: Center(
             child: Container(
                 margin: EdgeInsets.all(12.0),
-                child: Column(
+                child: ListView(
                   children: [
                     SizedBox(
                       height: 5,
@@ -345,7 +358,7 @@ class profilPic extends StatelessWidget {
             backgroundImage: AssetImage("assets/images/logo2.png"),
           ),
           Positioned(
-              right: -12,
+              right: MediaQuery.of(context).size.width / 2 - 80,
               bottom: 0,
               child: SizedBox(
                 height: 46,
