@@ -5,6 +5,7 @@ import 'package:food_app/Mainpages/morepage.dart';
 import 'package:food_app/Mainpages/orderpage.dart';
 import 'package:food_app/Mainpages/promopage.dart';
 import 'package:food_app/widgets/loginMan.dart';
+import 'package:food_app/widgets/registMan.dart';
 import 'package:food_app/widgets/sampledata.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -117,7 +118,7 @@ class _MainPageState extends State<MainPage> {
           color: Colors.black.withOpacity(0.4),
           image: DecorationImage(
               image: NetworkImage(
-                  "https://images.pexels.com/photos/3343624/pexels-photo-3343624.jpeg?crop=entropy&cs=srgb&dl=pexels-arthur-brognoli-3343624.jpg&fit=crop&fm=jpg&h=959&w=640"),
+                  "https://images.pexels.com/photos/1301945/pexels-photo-1301945.jpeg?crop=entropy&cs=srgb&dl=pexels-kevin-bidwell-1301945.jpg&fit=crop&fm=jpg&h=960&w=640"),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.4), BlendMode.dstATop)),
@@ -181,7 +182,10 @@ class _MainPageState extends State<MainPage> {
                   )),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => registMan()));
+              },
               child: Container(
                   padding: EdgeInsets.all(10),
                   height: 57,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/mainpage.dart';
+import 'package:food_app/widgets/loginMan.dart';
 import 'package:food_app/widgets/headerwidget.dart';
-import 'package:food_app/widgets/registMan.dart';
 
-class loginMan extends StatefulWidget {
+class registMan extends StatefulWidget {
   @override
-  _loginManState createState() => _loginManState();
+  _registManState createState() => _registManState();
 }
 
-class _loginManState extends State<loginMan> {
+class _registManState extends State<registMan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,23 +47,36 @@ class _loginManState extends State<loginMan> {
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 10,
             ),
             SizedBox(
-              height: 40,
+              height: 35,
             ),
             Text(
-              "Login to your account.",
-              textAlign: TextAlign.center,
+              "Register Account",
+              //textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.normal),
             ),
             SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Please register in our application to start your delicious journey!",
+              //textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w200),
+            ),
+            SizedBox(
               height: 25,
             ),
-            buildTextField("Email or Username", ""),
+            buildTextField("Name", ""),
+            buildTextField("Email address", ""),
+            buildTextField("Phone Number", ""),
             buildTextField("Password", ""),
             SizedBox(height: 50),
             GestureDetector(
@@ -78,7 +91,7 @@ class _loginManState extends State<loginMan> {
                       border: Border.all(width: 2, color: Colors.red)),
                   child: Center(
                     child: Text(
-                      "Login",
+                      "Register",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -90,10 +103,10 @@ class _loginManState extends State<loginMan> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 50,
+                    height: 20,
                   ),
                   Text(
-                    "Or, Login with",
+                    "Or, Register with",
                     style: TextStyle(color: Colors.white),
                   ),
                   GestureDetector(
@@ -120,7 +133,7 @@ class _loginManState extends State<loginMan> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't have an account? ",
+                        "Already have an account? ",
                         style: TextStyle(color: Colors.white),
                       ),
                       GestureDetector(
@@ -128,10 +141,10 @@ class _loginManState extends State<loginMan> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => registMan()));
+                                  builder: (context) => loginMan()));
                         },
                         child: Text(
-                          "Register",
+                          "Log In",
                           style: TextStyle(color: Colors.red),
                         ),
                       ),
