@@ -39,6 +39,7 @@ class _HomepageState extends State<Homepage> {
         child: ListView(
           children: [
             promoBanner(),
+            ratesReview(),
             searchbar(),
             category(),
             menu(),
@@ -93,6 +94,97 @@ class _HomepageState extends State<Homepage> {
                     borderRadius: BorderRadius.circular(10)),
               )),
     );
+  }
+
+  ratesReview() {
+    if (review.length > 0)
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 90,
+        margin: EdgeInsets.only(top: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Rating & Review',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                Text(
+                  'see all',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ),
+              ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: review.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    String email = order[order.indexWhere((element) =>
+                            element.orderId == review[index].orderId)]
+                        .customerEmail;
+
+                    List<Cart> thisOrder = order[order.indexWhere((element) =>
+                            element.orderId == review[index].orderId)]
+                        .cart;
+
+                    List<String> foodName = [];
+
+                    for (int i = 0; i < thisOrder.length; i++) {
+                      foodName.add(thisOrder[i].name);
+                    }
+
+                    String listOfOrder = foodName.join(", ");
+
+                    return Container(
+                      width: MediaQuery.of(context).size.width - 50,
+                      //color: Colors.red,
+                      height: 80,
+                      child: ListTile(
+                        minLeadingWidth: 0,
+                        leading: Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.star,
+                              color: Colors.orange,
+                              size: 45.0,
+                            ),
+                            Text(
+                              review[index].rating.toString(),
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        title: Text(
+                          review[index].review,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        subtitle: Text(
+                          "by John Doe while ordering " + listOfOrder,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 12),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+          ],
+        ),
+      );
+
+    return Container();
   }
 
   category() {

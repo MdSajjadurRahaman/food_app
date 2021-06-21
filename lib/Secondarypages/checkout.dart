@@ -291,7 +291,7 @@ class _CheckoutState extends State<Checkout> {
     final addOrder;
     if (success != null) {
       var orderId = Uuid().v4();
-      addOrder = Order(orderId, "test@mail.com", 2, cart, 0,
+      addOrder = Order(orderId, "test@mail.com", 2, List.from(cart), 0,
           "Bangsar, Kuala Lumpur", DateTime.now(), 0);
       setState(() {
         print("hehe");
