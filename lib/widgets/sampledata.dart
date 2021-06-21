@@ -42,16 +42,24 @@ class Profile {
 }
 
 class Order {
-  const Order(this.orderId, this.customerEmail, this.status, this.cart,
-      this.via, this.location, this.time, this.paymentMethod);
-  final String orderId;
-  final String customerEmail;
-  final int status;
-  final List<Cart> cart;
-  final int via;
-  final String location;
-  final DateTime time;
-  final int paymentMethod;
+  Order(
+    this.orderId,
+    this.customerEmail,
+    this.status,
+    this.cart,
+    this.via,
+    this.location,
+    this.time,
+    this.paymentMethod,
+  );
+  String orderId;
+  String customerEmail;
+  int status;
+  List<Cart> cart;
+  int via;
+  String location;
+  DateTime time;
+  int paymentMethod;
 }
 
 class FoodList {
@@ -62,6 +70,14 @@ class FoodList {
   final int quantity;
 }
 
+class Review {
+  Review(this.orderId, this.rating, this.review);
+  String orderId;
+  double rating;
+  String review;
+}
+
+List<Review> review = <Review>[];
 List<Cart> cart = <Cart>[];
 List<Order> order = <Order>[];
 //List<FoodList> foodList = <FoodList>[];
