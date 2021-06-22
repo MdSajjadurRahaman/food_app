@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Secondarypages/checkout.dart';
+import 'package:food_app/Secondarypages/reviewpage.dart';
 import 'package:food_app/widgets/foodwidget.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
@@ -113,9 +114,17 @@ class _HomepageState extends State<Homepage> {
                   'Rating & Review',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
-                Text(
-                  'see all',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Reviewpage()),
+                    );
+                  },
+                  child: Text(
+                    'see all',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
                 ),
               ],
             ),
@@ -171,7 +180,7 @@ class _HomepageState extends State<Homepage> {
                               fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                         subtitle: Text(
-                          "by John Doe while ordering " + listOfOrder,
+                          "by John Doe after ordering " + listOfOrder,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 12),

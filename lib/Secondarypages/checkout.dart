@@ -289,7 +289,7 @@ class _CheckoutState extends State<Checkout> {
       return Paymentpage(total: total);
     }));
     final addOrder;
-    if (success != null) {
+    if (success != null && success == true) {
       var orderId = Uuid().v4();
       addOrder = Order(orderId, "test@mail.com", 2, List.from(cart), 0,
           "Bangsar, Kuala Lumpur", DateTime.now(), 0);
@@ -303,6 +303,7 @@ class _CheckoutState extends State<Checkout> {
       });
     } else {
       print("payment_fail");
+      Navigator.pop(context);
     }
   }
 }
