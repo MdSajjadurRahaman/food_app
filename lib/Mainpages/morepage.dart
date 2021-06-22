@@ -26,20 +26,55 @@ class inbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(color: Colors.red),
-        backgroundColor: Colors.white,
-        title: Text(
-          "Inbox",
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black),
+        appBar: AppBar(
+          leading: BackButton(color: Colors.red),
+          backgroundColor: Colors.white,
+          title: Text(
+            "Inbox",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black),
+          ),
+          elevation: 0,
         ),
-        elevation: 0,
-      ),
-      body: Center(
-        child: Text("No message available"),
-      ),
-    );
+        body: Container(
+            child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => FeedBack()));
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ListTile(
+                contentPadding: EdgeInsets.all(10),
+                trailing: Icon(
+                  Icons.announcement_rounded,
+                  size: 50,
+                  color: Colors.blue,
+                ),
+                title: Text(
+                  "Your review is special for us!",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18,
+                      color: Colors.red),
+                ),
+                subtitle: Text(
+                  "Join our survey to improve your experience!",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      color: Colors.black),
+                ),
+              ),
+              Divider(
+                thickness: 3,
+              )
+            ],
+          ),
+        )));
   }
 }
 
