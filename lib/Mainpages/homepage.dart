@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Secondarypages/checkout.dart';
-import 'package:food_app/Secondarypages/reviewpage.dart';
+import 'package:food_app/Tertiarypages/reviewpage.dart';
 import 'package:food_app/widgets/foodwidget.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
@@ -47,15 +47,21 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
-      floatingActionButton: cart.length > 0
+      floatingActionButton: cart.isNotEmpty
           ? Stack(
               children: [
                 FloatingActionButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Checkout()),
-                    );
+                  onPressed: () async {
+                    final success = await Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return Checkout();
+                    }));
+                    if (success != null && success == true) {
+                      setState(() {
+                        print("hehe");
+                        cart.clear();
+                      });
+                    }
                   },
                   child: const Icon(Icons.shopping_cart_rounded),
                   backgroundColor: Colors.red,
@@ -309,7 +315,7 @@ class _HomepageState extends State<Homepage> {
 
   menu() {
     return Container(
-      height: 1200,
+      //height: 1200,
       width: MediaQuery.of(context).size.width,
       child: GridView.builder(
           shrinkWrap: true,

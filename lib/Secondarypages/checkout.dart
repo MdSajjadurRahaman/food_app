@@ -299,7 +299,7 @@ class _CheckoutState extends State<Checkout> {
         print(order.length);
         print(order[0].cart[0].name);
         cart.clear();
-        Navigator.pop(context);
+        Navigator.pop(context, true);
       });
     } else {
       print("payment_fail");
