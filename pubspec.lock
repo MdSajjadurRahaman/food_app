@@ -212,13 +212,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
-  platform_interface:
-    depplugin_endency: transitive
+  plugin_platform_interface:
+    dependency: transitive
     description:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "2.0.0"
   process:
     dependency: transitive
     description:

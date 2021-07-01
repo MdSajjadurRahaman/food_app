@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_app/Desktopview/desktophome.dart';
 import 'package:food_app/mainpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.red,
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Colors.white),
-      home: SplashScreen(),
+      home: kIsWeb ? Desktophome() : SplashScreen(),
     );
   }
 }

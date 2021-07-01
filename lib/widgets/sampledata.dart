@@ -135,31 +135,31 @@ List<Menu> menus = <Menu>[
       'Pasta la vista',
       20,
       "https://images.pexels.com/photos/6287548/pexels-photo-6287548.jpeg?cs=srgb&dl=pexels-klaus-nielsen-6287548.jpg&fm=jpg&h=960&w=640",
-      "Pizza"),
+      "Pasta"),
   const Menu(
       '76868686',
       'Carbonara Pasta',
       23,
       "https://images.pexels.com/photos/1256875/pexels-photo-1256875.jpeg?cs=srgb&dl=pexels-lgh-1256875.jpg&fm=jpg&h=960&w=640",
-      "Pizza"),
+      "Pasta"),
   const Menu(
       '2342626262',
       'Bolognise Pasta',
       14,
       "https://images.pexels.com/photos/5419336/pexels-photo-5419336.jpeg?cs=srgb&dl=pexels-polina-tankilevitch-5419336.jpg&fm=jpg&h=960&w=640",
-      "Pizza"),
+      "Pasta"),
   const Menu(
       '62626222',
       'Aglio Olio Pasta',
       33,
       "https://images.pexels.com/photos/5507643/pexels-photo-5507643.jpeg?cs=srgb&dl=pexels-jess-vide-5507643.jpg&fm=jpg&h=960&w=640",
-      "Pizza"),
+      "Pasta"),
   const Menu(
       '765757555',
       'Lasagne',
       22,
       "https://images.pexels.com/photos/5949890/pexels-photo-5949890.jpeg?cs=srgb&dl=pexels-alleksana-5949890.jpg&fm=jpg&h=960&w=640",
-      "Pizza"),
+      "Sides"),
 ];
 
 List<Category> categories = <Category>[

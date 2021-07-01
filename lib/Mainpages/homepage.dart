@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Secondarypages/checkout.dart';
+import 'package:food_app/Secondarypages/searchpage.dart';
 import 'package:food_app/Tertiarypages/reviewpage.dart';
 import 'package:food_app/widgets/foodwidget.dart';
 import 'package:food_app/widgets/headerwidget.dart';
@@ -12,6 +13,9 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  String selectedCategory = "Pizza";
+
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -215,57 +219,109 @@ class _HomepageState extends State<Homepage> {
               if (index == 0) {
                 return Row(
                   children: [
-                    Container(
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedCategory = "all";
+                          print(selectedCategory);
+                        });
+                      },
+                      child: Container(
+                          margin: EdgeInsets.only(right: 10),
+                          width: 50,
+                          alignment: Alignment.center,
+                          height: 80,
+                          decoration: BoxDecoration(
+                              color: selectedCategory == "all"
+                                  ? Colors.red
+                                  : Colors.black12,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Text(
+                            "View All",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: selectedCategory == "all"
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedCategory = categories[index].category;
+                          print(selectedCategory);
+                        });
+                      },
+                      child: Container(
                         margin: EdgeInsets.only(right: 10),
-                        width: 50,
-                        alignment: Alignment.center,
+                        width: 80,
                         height: 80,
                         decoration: BoxDecoration(
-                            color: Colors.red,
+                            color:
+                                selectedCategory == categories[index].category
+                                    ? Colors.red
+                                    : Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                        child: Text(
-                          "View All",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        )),
-                    Container(
-                      margin: EdgeInsets.only(right: 10),
-                      width: 80,
-                      height: 80,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                            height: 40,
-                            image: NetworkImage(categories[index].iconUrl),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(categories[index].category)
-                        ],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image(
+                              height: 40,
+                              image: NetworkImage(categories[index].iconUrl),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              categories[index].category,
+                              style: TextStyle(
+                                  color: selectedCategory ==
+                                          categories[index].category
+                                      ? Colors.white
+                                      : Colors.black),
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
                 );
               } else {
-                return Container(
-                  margin: EdgeInsets.only(right: 10),
-                  width: 80,
-                  height: 80,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(
-                        height: 40,
-                        image: NetworkImage(categories[index].iconUrl),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(categories[index].category)
-                    ],
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedCategory = categories[index].category;
+                      print(selectedCategory);
+                    });
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(right: 10),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: selectedCategory == categories[index].category
+                            ? Colors.red
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                          height: 40,
+                          image: NetworkImage(categories[index].iconUrl),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(categories[index].category,
+                            style: TextStyle(
+                                color: selectedCategory ==
+                                        categories[index].category
+                                    ? Colors.white
+                                    : Colors.black))
+                      ],
+                    ),
                   ),
                 );
               }
@@ -292,7 +348,17 @@ class _HomepageState extends State<Homepage> {
           ),
           new Expanded(
             child: TextField(
+              textInputAction: TextInputAction.go,
+              onSubmitted: (value) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Searchpage(search: searchController.text)),
+                );
+              },
               keyboardType: TextInputType.text,
+              controller: searchController,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Search menu",
@@ -314,6 +380,14 @@ class _HomepageState extends State<Homepage> {
   }
 
   menu() {
+    List<Menu> homepageMenus;
+    if (selectedCategory == "all") {
+      homepageMenus = List.from(menus);
+    } else {
+      homepageMenus = List.from(
+          menus.where((element) => element.category == selectedCategory));
+    }
+
     return Container(
       //height: 1200,
       width: MediaQuery.of(context).size.width,
@@ -322,16 +396,16 @@ class _HomepageState extends State<Homepage> {
           physics: ScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisSpacing: 10, mainAxisSpacing: 10, crossAxisCount: 2),
-          itemCount: menus.length,
+          itemCount: homepageMenus.length,
           itemBuilder: (BuildContext ctx, index) {
             return GestureDetector(
               onTap: () {
                 showFood(context,
-                    id: menus[index].id,
-                    name: menus[index].name,
-                    price: menus[index].price,
-                    category: menus[index].category,
-                    url: menus[index].url);
+                    id: homepageMenus[index].id,
+                    name: homepageMenus[index].name,
+                    price: homepageMenus[index].price,
+                    category: homepageMenus[index].category,
+                    url: homepageMenus[index].url);
               },
               child: Container(
                 height: 310,
@@ -339,7 +413,7 @@ class _HomepageState extends State<Homepage> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
                   image: DecorationImage(
-                    image: NetworkImage(menus[index].url),
+                    image: NetworkImage(homepageMenus[index].url),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -353,7 +427,7 @@ class _HomepageState extends State<Homepage> {
                           0.4) //HexColor("#690000").withOpacity(0.35)
                       ),
                   child: Text(
-                    menus[index].name, //sampledata
+                    homepageMenus[index].name, //sampledata
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
