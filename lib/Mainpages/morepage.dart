@@ -79,6 +79,31 @@ class inbox extends StatelessWidget {
 }
 
 // ignore: camel_case_types
+class about extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(color: Colors.red),
+        backgroundColor: Colors.white,
+        title: Text(
+          "About us",
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.black),
+        ),
+        elevation: 0,
+      ),
+      body: Center(
+        child: Text(
+          "For more information, please go to www.huacomm.com.my \n or \n call +601472583697",
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: camel_case_types
 class help extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -361,6 +386,26 @@ class tombol extends StatelessWidget {
                         Icon(Icons.help),
                         Text(
                           "   Help",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.grey),
+                        )
+                      ]))),
+          FlatButton(
+              onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => about()))
+                  },
+              color: Colors.white,
+              child: Padding(
+                  padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(Icons.question_answer),
+                        Text(
+                          "   About Apps",
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
