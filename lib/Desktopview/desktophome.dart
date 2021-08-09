@@ -1,11 +1,18 @@
+import 'dart:async';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/Desktopview/adminSide/adminDashboard.dart';
+import 'package:food_app/Desktopview/adminSide/testing.dart';
 import 'package:food_app/Desktopview/desktopFood.dart';
 import 'package:food_app/widgets/sampledata.dart';
 import 'package:food_app/Secondarypages/checkout.dart';
 import 'package:food_app/Secondarypages/searchpage.dart';
 import 'package:food_app/Tertiarypages/reviewpage.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pinput/pin_put/pin_put.dart';
+import 'package:pinput/pin_put/pin_put_state.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class Desktophome extends StatefulWidget {
   @override
@@ -14,37 +21,204 @@ class Desktophome extends StatefulWidget {
 
 class _DesktophomeState extends State<Desktophome> {
   String selectedCategory = "Pizza";
-
+  bool isLoggedIn = false;
+  var onTapRecognizer;
   TextEditingController searchController = TextEditingController();
+  final TextEditingController _pinPutController = TextEditingController();
+  final FocusNode _pinPutFocusNode = FocusNode();
+  final formKey = GlobalKey<FormState>();
+  BoxDecoration get _pinPutDecoration {
+    return BoxDecoration(
+      border: Border.all(color: Colors.deepPurpleAccent),
+      borderRadius: BorderRadius.circular(15.0),
+    );
+  }
+
+  bool hasError = false;
+  String currentText = "";
+
+  TextEditingController textEditingController = TextEditingController();
+  // ..text = "123456";
+
+  late StreamController<ErrorAnimationType> errorController;
+
+  @override
+  void initState() {
+    onTapRecognizer = TapGestureRecognizer()
+      ..onTap = () {
+        Navigator.pop(context);
+      };
+    errorController = StreamController<ErrorAnimationType>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    errorController.close();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: ListView(
-        children: [
-          menuBar(),
-          promoBanner(),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 300, vertical: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                category(),
-                Container(
-                  height: MediaQuery.of(context).size.height / 2,
-                  child: VerticalDivider(
-                    width: 5,
-                    color: Colors.black12,
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                menu(),
-              ],
-            ),
-          )
-        ],
+      backgroundColor: HexColor("#333a45"),
+      body: Container(
+        alignment: Alignment.center,
+        child: Container(
+          height: height / 2,
+          width: width / 3,
+          padding: EdgeInsets.all(50),
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [logo(), titleSubtitle(), username(), pin()],
+          ),
+        ),
       ),
+    );
+  }
+
+  logo() {
+    return Container(
+      alignment: Alignment.center,
+      height: 80,
+      child: Image(
+        image: AssetImage("assets/images/logo2.png"),
+        fit: BoxFit.fitHeight,
+      ),
+    );
+  }
+
+  titleSubtitle() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text("Pizza Restaurant", style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(loremipsum, textAlign: TextAlign.center, style: TextStyle()),
+      ],
+    );
+  }
+
+  username() {
+    return TextField(
+      textAlign: TextAlign.start,
+      decoration: InputDecoration(
+        hintText: "Admin",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(
+            width: 0,
+            style: BorderStyle.none,
+          ),
+        ),
+        filled: true,
+        contentPadding: EdgeInsets.all(16),
+        fillColor: HexColor("#F2F2F2"),
+      ),
+    );
+  }
+
+  pin() {
+    return Form(
+      key: formKey,
+      child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
+          child: PinCodeTextField(
+            appContext: context,
+            pastedTextStyle: TextStyle(
+              color: Colors.green.shade600,
+              fontWeight: FontWeight.bold,
+            ),
+            length: 6,
+            obscureText: false,
+            obscuringCharacter: '*',
+            animationType: AnimationType.fade,
+            validator: (v) {
+              if (v!.length < 3) {
+                return "Please submit correct pin";
+              } else {
+                return null;
+              }
+            },
+            pinTheme: PinTheme(
+              shape: PinCodeFieldShape.box,
+              borderRadius: BorderRadius.circular(5),
+              fieldHeight: 60,
+              fieldWidth: 50,
+              activeFillColor: hasError ? Colors.orange : Colors.white,
+            ),
+            cursorColor: Colors.black,
+            animationDuration: Duration(milliseconds: 300),
+            textStyle: TextStyle(fontSize: 20, height: 1.6),
+
+            enableActiveFill: true,
+            errorAnimationController: errorController,
+            controller: textEditingController,
+            keyboardType: TextInputType.number,
+            boxShadows: [
+              BoxShadow(
+                offset: Offset(0, 1),
+                color: Colors.black12,
+                blurRadius: 10,
+              )
+            ],
+            onCompleted: (v) {
+              print("Completed");
+            },
+            // onTap: () {
+            //   print("Pressed");
+            // },
+            onChanged: (value) {
+              print(value);
+              setState(() {
+                currentText = value;
+                if (value == '123123') {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => AdminDashboard()),
+                  );
+                }
+              });
+            },
+            beforeTextPaste: (text) {
+              print("Allowing to paste $text");
+              //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+              //but you can show anything you want here, like your pop up saying wrong paste format or etc
+              return true;
+            },
+          )),
+    );
+  }
+
+  homepage() {
+    return ListView(
+      children: [
+        menuBar(),
+        promoBanner(),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 300, vertical: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              category(),
+              Container(
+                height: MediaQuery.of(context).size.height / 2,
+                child: VerticalDivider(
+                  width: 5,
+                  color: Colors.black12,
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              menu(),
+            ],
+          ),
+        )
+      ],
     );
   }
 

@@ -34,6 +34,15 @@ dependencies:
   uuid: ^3.0.4
   intl: ^0.17.0
   rating_dialog: ^2.0.1
+  flutter_qiblah: ^2.0.1
+  geolocator: ^7.2.0+1
+  flutter_svg: ^0.22.0
+  google_maps_flutter: ^2.0.6
+  dart_ipify: ^1.0.2
+  collapsible_sidebar: ^2.0.1
+  fast_color_picker: ^0.1.0
+  pinput: ^1.2.0
+  pin_code_fields: ^7.3.0
 
 dev_dependencies:
   flutter_test:
