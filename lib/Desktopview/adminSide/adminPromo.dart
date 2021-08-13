@@ -7,6 +7,11 @@ class AdminPromo extends StatefulWidget {
 }
 
 class _AdminPromoState extends State<AdminPromo> {
+  TextEditingController id = TextEditingController(text: "");
+  TextEditingController name = TextEditingController(text: "");
+  TextEditingController code = TextEditingController(text: "");
+  TextEditingController amount = TextEditingController(text: "");
+  bool isActive = true;
   int _groupValue = 0;
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,13 @@ class _AdminPromoState extends State<AdminPromo> {
         ],
       ),
     );
+  }
+
+  idGenerator() {
+    setState(() {
+      id.text = new DateTime.now().millisecondsSinceEpoch.toString();
+      code.text = new DateTime.now().millisecondsSinceEpoch.toString();
+    });
   }
 
   addNewPromo() {
@@ -70,14 +82,31 @@ class _AdminPromoState extends State<AdminPromo> {
                 ),
               ),
               Divider(color: Colors.white),
-              textField("Fisttimefree"),
+              textField("01291737171",
+                  needHeader: true, header: "ID", text: id),
               Divider(color: Colors.white),
-              textField("100", needHeader: true, header: "amount"),
+              textField("Fisttimefree",
+                  needHeader: true, header: "Name", text: name),
+              Divider(color: Colors.white),
+              textField("100",
+                  needHeader: true, header: "amount", text: amount),
               radioButton(),
               Divider(color: Colors.white),
-              textField("abc123-0002", needHeader: true, header: "Code"),
+              textField("abc123-0002",
+                  needHeader: true, header: "Code", text: code),
               Divider(color: Colors.white),
-              textField("Lorem ipsum...", multiline: true),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  idGenerator();
+                },
+                child: const Text(
+                  'Generate Id & code',
+                  textAlign: TextAlign.start,
+                ),
+              ),
             ],
           ),
         ),
@@ -143,7 +172,10 @@ class _AdminPromoState extends State<AdminPromo> {
   }
 
   textField(String hint,
-      {bool multiline = false, bool needHeader = false, String header = ""}) {
+      {bool multiline = false,
+      bool needHeader = false,
+      String header = "",
+      TextEditingController? text}) {
     return Row(
       children: [
         needHeader
@@ -166,6 +198,7 @@ class _AdminPromoState extends State<AdminPromo> {
         Expanded(
           flex: 5,
           child: TextField(
+            controller: text!,
             textAlign: TextAlign.start,
             keyboardType:
                 multiline ? TextInputType.multiline : TextInputType.text,

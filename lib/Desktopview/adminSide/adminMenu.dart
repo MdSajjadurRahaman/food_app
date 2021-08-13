@@ -8,10 +8,16 @@ class AdminMenu extends StatefulWidget {
 }
 
 class _AdminMenuState extends State<AdminMenu> {
+  TextEditingController id = TextEditingController(text: "");
   TextEditingController name = TextEditingController(text: "");
   TextEditingController price = TextEditingController(text: "");
   TextEditingController category = TextEditingController(text: "");
   TextEditingController desc = TextEditingController(text: "");
+
+  String imgUrl = "";
+
+  bool isEdit = false;
+  int _groupValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +35,41 @@ class _AdminMenuState extends State<AdminMenu> {
               padding: EdgeInsets.all(50),
               child: ListView(
                 children: [
-                  Text("Menus",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 28)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Menus",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900, fontSize: 28)),
+                      Ink(
+                        decoration: const ShapeDecoration(
+                          color: Colors.red,
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.add),
+                          color: Colors.white,
+                          onPressed: () {
+                            setState(() {
+                              isEdit = false;
+                              name.clear();
+                              price.clear();
+                              category.clear();
+                              desc.clear();
+                              id.clear();
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                   Divider(color: Colors.white),
                   menu(),
                 ],
               ),
             ),
           ),
-          addNewMenu()
+          updateMenu()
         ],
       ),
     );
@@ -54,6 +85,7 @@ class _AdminMenuState extends State<AdminMenu> {
           physics: ScrollPhysics(),
           itemCount: menus.length,
           itemBuilder: (BuildContext ctx, index) {
+            bool isActive = true;
             return Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
@@ -75,8 +107,18 @@ class _AdminMenuState extends State<AdminMenu> {
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(menus[index].url),
                   ),
-                  title: Text(menus[index].name,
-                      style: TextStyle(fontWeight: FontWeight.w900)),
+                  title: Wrap(
+                    children: [
+                      Text(menus[index].name,
+                          style: TextStyle(fontWeight: FontWeight.w900)),
+                      Text(menus[index].isActive ? " Active" : " Inactive",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              color: menus[index].isActive
+                                  ? Theme.of(context).accentColor
+                                  : Colors.grey)),
+                    ],
+                  ),
                   subtitle: Text(menus[index].category),
                   trailing: Container(
                     width: 150,
@@ -89,9 +131,20 @@ class _AdminMenuState extends State<AdminMenu> {
                         VerticalDivider(
                           color: Colors.white,
                         ),
-                        Icon(
-                          Icons.edit_outlined,
-                          color: Theme.of(context).accentColor,
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              imgUrl = menus[index].url;
+                              isEdit = true;
+                              id.text = menus[index].id;
+                              name.text = menus[index].name;
+                              price.text = menus[index].price.toString();
+                            });
+                          },
+                          child: Icon(
+                            Icons.edit_outlined,
+                            color: Theme.of(context).accentColor,
+                          ),
                         ),
                         Icon(Icons.delete_outline,
                             color: Theme.of(context).accentColor)
@@ -103,7 +156,7 @@ class _AdminMenuState extends State<AdminMenu> {
     );
   }
 
-  addNewMenu() {
+  updateMenu() {
     return Expanded(
       flex: 1,
       child: Scaffold(
@@ -123,13 +176,15 @@ class _AdminMenuState extends State<AdminMenu> {
           ),
           child: ListView(
             children: [
-              Text("Add New Menu",
+              Text(isEdit ? "Edit Menu" : "Add New Menu",
                   style: TextStyle(fontWeight: FontWeight.w900, fontSize: 28)),
               Divider(color: Colors.white),
               Container(
                 height: MediaQuery.of(context).size.height * 0.3,
                 decoration: BoxDecoration(
                   color: HexColor("#F2F2F2"),
+                  image: DecorationImage(
+                      image: NetworkImage(imgUrl), fit: BoxFit.cover),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Icon(
@@ -138,11 +193,14 @@ class _AdminMenuState extends State<AdminMenu> {
                 ),
               ),
               Divider(color: Colors.white),
+              textField("123MEATLOVER",
+                  needHeader: true, header: "ID", text: id),
+              Divider(color: Colors.white),
               textField("Meatlover", text: name),
               Divider(color: Colors.white),
               textField("200", needHeader: true, header: "RM", text: price),
               Divider(color: Colors.white),
-              textField("200", text: category),
+              radioButton(),
               Divider(color: Colors.white),
               textField("Lorem ipsum...", multiline: true, text: desc),
             ],
@@ -158,18 +216,22 @@ class _AdminMenuState extends State<AdminMenu> {
       onTap: () {
         if (name.text.isNotEmpty && price.text.isNotEmpty) {
           final addMenu = Menu(
-              "123" + name.text,
+              id.text,
               name.text,
               double.parse(price.text),
               "https://via.placeholder.com/150.jpg",
-              "Pizza");
+              "Pizza",
+              _groupValue == 0 ? true : false);
           setState(() {
             menus.add(addMenu);
             name.clear();
             price.clear();
             category.clear();
             desc.clear();
+            id.clear();
           });
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Yay! Menu Added!')));
         }
       },
       child: Container(
@@ -181,11 +243,47 @@ class _AdminMenuState extends State<AdminMenu> {
             borderRadius: BorderRadius.circular(5)),
         alignment: Alignment.center,
         child: Text(
-          "Save",
+          isEdit ? "Update" : "Save",
           style: TextStyle(
               fontWeight: FontWeight.w800, fontSize: 15, color: Colors.white),
         ),
       ),
+    );
+  }
+
+  radioButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        new Radio(
+          value: 0,
+          groupValue: _groupValue,
+          onChanged: (int? value) {
+            setState(() {
+              _groupValue = value!;
+            });
+          },
+        ),
+        new Text(
+          'Active',
+          style: new TextStyle(fontSize: 16.0),
+        ),
+        new Radio(
+          value: 1,
+          groupValue: _groupValue,
+          onChanged: (int? value) {
+            setState(() {
+              _groupValue = value!;
+            });
+          },
+        ),
+        new Text(
+          'Inactive',
+          style: new TextStyle(
+            fontSize: 16.0,
+          ),
+        ),
+      ],
     );
   }
 
@@ -218,12 +316,14 @@ class _AdminMenuState extends State<AdminMenu> {
           child: TextField(
             controller: text!,
             textAlign: TextAlign.start,
+            style: TextStyle(fontWeight: FontWeight.bold),
             keyboardType:
                 multiline ? TextInputType.multiline : TextInputType.text,
             maxLines: multiline ? null : 1,
             minLines: multiline ? null : 1,
             decoration: InputDecoration(
               hintText: hint,
+              hintStyle: TextStyle(fontWeight: FontWeight.normal),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
                 borderSide: BorderSide(

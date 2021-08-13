@@ -1,0 +1,2 @@
+ml/medyas/flutter_qiblah/BuildConfig.java
+ ml.medyas.flutter_qiblah.BuildConfig

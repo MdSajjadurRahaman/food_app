@@ -43,6 +43,7 @@ dependencies:
   fast_color_picker: ^0.1.0
   pinput: ^1.2.0
   pin_code_fields: ^7.3.0
+  numeric_keyboard: ^1.1.0
 
 dev_dependencies:
   flutter_test:
