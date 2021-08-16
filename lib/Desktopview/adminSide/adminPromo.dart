@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/widgets/sampledata.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class AdminPromo extends StatefulWidget {
@@ -34,8 +35,10 @@ class _AdminPromoState extends State<AdminPromo> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Promotions",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900, fontSize: 28)),
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.w700),
+                          )),
                       TextButton(
                           child:
                               Text("Add Promo", style: TextStyle(fontSize: 14)),

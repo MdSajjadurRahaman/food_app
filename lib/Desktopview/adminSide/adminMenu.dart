@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/widgets/sampledata.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class AdminMenu extends StatefulWidget {
@@ -39,8 +40,10 @@ class _AdminMenuState extends State<AdminMenu> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Menus",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900, fontSize: 28)),
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.w700),
+                          )),
                       Ink(
                         decoration: const ShapeDecoration(
                           color: Colors.red,
@@ -57,6 +60,7 @@ class _AdminMenuState extends State<AdminMenu> {
                               category.clear();
                               desc.clear();
                               id.clear();
+                              imgUrl = "";
                             });
                           },
                         ),

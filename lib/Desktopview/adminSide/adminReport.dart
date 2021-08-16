@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class AdminReport extends StatefulWidget {
@@ -19,8 +20,10 @@ class _AdminReportState extends State<AdminReport> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Report",
-                    style:
-                        TextStyle(fontWeight: FontWeight.w900, fontSize: 28)),
+                    style: GoogleFonts.poppins(
+                      textStyle:
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+                    )),
                 TextButton(
                     child: Text("Refresh", style: TextStyle(fontSize: 14)),
                     style: ButtonStyle(

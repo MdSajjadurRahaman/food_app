@@ -203,7 +203,7 @@ class _DashboardState extends State<Dashboard> {
       body: Container(
         decoration: BoxDecoration(
             color: HexColor("#EBEBEB"),
-            borderRadius: BorderRadius.circular(30)),
+            borderRadius: BorderRadius.circular(15)),
         margin: EdgeInsets.all(30),
         //padding: EdgeInsets.all(30),
         child: Column(
@@ -212,7 +212,7 @@ class _DashboardState extends State<Dashboard> {
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
                   color: Theme.of(context).accentColor,
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(15)),
               child: Row(
                 children: [
                   Container(
@@ -268,128 +268,55 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          spreadRadius: -3,
-                          blurRadius: 10,
-                          offset: Offset(0, 0), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Sales Overview",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900, fontSize: 20)),
-                        Divider(color: Colors.white),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                children: [
-                                  salesList(
-                                      Colors.green, "Total Sales", "2131"),
-                                  salesList(
-                                      Colors.red, "Sales this week", "21"),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                children: [
-                                  salesList(Colors.blueAccent, "Total Income",
-                                      "RM20131"),
-                                  salesList(Colors.orangeAccent,
-                                      "Income this week", "RM221"),
-                                ],
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  salesWidget("Today's Sales", 500,
+                      "https://image.flaticon.com/icons/png/512/1134/1134921.png"),
+                  VerticalDivider(),
+                  salesWidget("This Week Sales", 2000,
+                      "https://image.flaticon.com/icons/png/512/4285/4285646.png"),
+                  VerticalDivider(),
+                  salesWidget("This Month Sales", 10000,
+                      "https://image.flaticon.com/icons/png/512/2413/2413641.png"),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 30),
+              height: 300,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
+              child: Text(
+                "Chart Coming Soon",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black26,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700),
                 ),
-                SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          spreadRadius: -3,
-                          blurRadius: 10,
-                          offset: Offset(0, 0), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    padding: EdgeInsets.all(50),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text("Customer total",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900, fontSize: 20)),
-                        Divider(color: Colors.white),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: customerList(
-                                  Colors.green, "504", "Registered"),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: customerList(
-                                  Colors.blueAccent, "30", "Guest"),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+              ),
+            ),
+            SizedBox(
+              height: 15,
             ),
             Expanded(
               flex: 1,
               child: Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(top: 20),
-                padding: EdgeInsets.symmetric(vertical: 30),
+                margin: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.symmetric(vertical: 5),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      spreadRadius: -3,
-                      blurRadius: 10,
-                      offset: Offset(0, 0), // changes position of shadow
-                    ),
-                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -397,23 +324,76 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      height: 180,
+                      height: 50,
                       child: Image(
                         image: NetworkImage(
                             "https://i.ibb.co/hMHDj7h/download.png"),
                         fit: BoxFit.fitHeight,
                       ),
                     ),
-                    Text("Hi Admin!",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold)),
                     Text(
-                        "Welcome to Pizza Dashboard, here you can manage your Income, Orders, Promotions, Menu and other! ",
-                        style: TextStyle(fontSize: 15)),
+                      "Hi Admin!",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    Text(
+                      "Welcome to Pizza Dashboard, here you can manage your Income, Orders, Promotions, Menu and other! ",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w500),
+                      ),
+                    ),
                   ],
                 ),
               ),
-            )
+            ),
+            SizedBox(
+              height: 15,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  salesWidget(String title, double amount, String url) {
+    return Expanded(
+      flex: 1,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 50),
+        height: 120,
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.white,
+              backgroundImage: NetworkImage(url),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    textStyle:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  ),
+                ),
+                Text(
+                  "RM " + amount.toString(),
+                  style: GoogleFonts.poppins(
+                    textStyle:
+                        TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

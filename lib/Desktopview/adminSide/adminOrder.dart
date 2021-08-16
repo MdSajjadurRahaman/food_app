@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/Secondarypages/orderdetails.dart';
 import 'package:food_app/widgets/sampledata.dart';
 import 'package:food_app/widgets/tabheaderwidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
@@ -76,8 +77,10 @@ class _AdminOrderState extends State<AdminOrder> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text("Orders",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900, fontSize: 28)),
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.w700),
+                          )),
                       TextButton(
                           child:
                               Text("Refresh", style: TextStyle(fontSize: 14)),

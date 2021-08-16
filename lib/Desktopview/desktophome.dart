@@ -9,6 +9,7 @@ import 'package:food_app/widgets/sampledata.dart';
 import 'package:food_app/Secondarypages/checkout.dart';
 import 'package:food_app/Secondarypages/searchpage.dart';
 import 'package:food_app/Tertiarypages/reviewpage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:pinput/pin_put/pin_put_state.dart';
@@ -67,11 +68,17 @@ class _DesktophomeState extends State<Desktophome> {
       backgroundColor: HexColor("#333a45"),
       body: Container(
         alignment: Alignment.center,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                    "https://images.pexels.com/photos/5714752/pexels-photo-5714752.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"),
+                fit: BoxFit.cover)),
         child: Container(
           height: height / 2,
           width: width / 3,
-          padding: EdgeInsets.all(50),
-          color: Colors.white,
+          padding: EdgeInsets.all(60),
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(20)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [logo(), titleSubtitle(), username(), pin()],
@@ -96,8 +103,15 @@ class _DesktophomeState extends State<Desktophome> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text("Pizza Restaurant", style: TextStyle(fontWeight: FontWeight.bold)),
-        Text(loremipsum, textAlign: TextAlign.center, style: TextStyle()),
+        Text("Pizza Restaurant Sdn. Bhd",
+            style: GoogleFonts.poppins(
+              textStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+            )),
+        Text(loremipsum,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.poppins(
+              textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            )),
       ],
     );
   }
