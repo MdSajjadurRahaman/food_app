@@ -8,6 +8,7 @@ import 'package:food_app/Desktopview/adminSide/adminPromo.dart';
 import 'package:food_app/Desktopview/adminSide/adminReport.dart';
 import 'package:food_app/Desktopview/adminSide/adminSetting.dart';
 import 'package:food_app/widgets/headerwidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class AdminDashboard extends StatefulWidget {
@@ -198,47 +199,73 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor("#F8F8FA"),
+      backgroundColor: Colors.white,
       body: Container(
-        padding: EdgeInsets.all(80),
+        decoration: BoxDecoration(
+            color: HexColor("#EBEBEB"),
+            borderRadius: BorderRadius.circular(30)),
+        margin: EdgeInsets.all(30),
+        //padding: EdgeInsets.all(30),
         child: Column(
           children: [
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(right: 50),
-                  height: 100,
-                  //margin: EdgeInsets.only(bottom: 10),
-                  width: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/logo2.png"),
-                      fit: BoxFit.cover,
+            Container(
+              padding: EdgeInsets.all(30),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).accentColor,
+                  borderRadius: BorderRadius.circular(30)),
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 50),
+                    height: 100,
+                    //margin: EdgeInsets.only(bottom: 10),
+                    width: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/logo2.png"),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 80,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Pizza Restaurant",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900, fontSize: 20)),
-                      Text("Kuala Lumpur, Malaysia",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: Colors.black38)),
-                      Text("SSN : 023193019380182301",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 15)),
-                    ],
-                  ),
-                )
-              ],
+                  Container(
+                    height: 80,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Pizza Restaurant Sdn. Bhd.",
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        Text(
+                          "Kuala Lumpur, Malaysia",
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        Text(
+                          "SSN : 023193019380182301",
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(
               height: 20,

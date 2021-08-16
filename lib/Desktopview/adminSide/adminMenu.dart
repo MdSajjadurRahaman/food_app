@@ -121,9 +121,7 @@ class _AdminMenuState extends State<AdminMenu> {
                   ),
                   subtitle: Text(menus[index].category),
                   trailing: Container(
-                    width: 150,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Wrap(
                       children: [
                         Text("RM " + menus[index].price.toString(),
                             style: TextStyle(

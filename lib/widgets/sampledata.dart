@@ -16,14 +16,13 @@ class Category {
 }
 
 class Menu {
-  const Menu(
-      this.id, this.name, this.price, this.url, this.category, this.isActive);
-  final String id;
-  final String name;
-  final double price;
-  final String url;
-  final String category;
-  final bool isActive;
+  Menu(this.id, this.name, this.price, this.url, this.category, this.isActive);
+  String id;
+  String name;
+  double price;
+  String url;
+  String category;
+  bool isActive;
 }
 
 class Promotion {
@@ -33,6 +32,13 @@ class Promotion {
   bool status;
   String promoCode;
   String url;
+}
+
+class DailySales {
+  DailySales(this.date, this.income, this.order);
+  DateTime date;
+  String income;
+  List<Order> order;
 }
 
 class Profile {
@@ -90,84 +96,84 @@ List<Profile> profiles = <Profile>[
 ];
 
 List<Menu> menus = <Menu>[
-  const Menu(
+  Menu(
       '928819991',
       'Special Cheesy',
       20,
       "https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1260968.jpg&fm=jpg&h=960&w=640",
       "Pizza",
       true),
-  const Menu(
+  Menu(
       '33333333',
       'Hot Cheesy',
       15,
       "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?cs=srgb&dl=pexels-brett-jordan-825661.jpg&fm=jpg&h=960&w=640",
       "Pizza",
       true),
-  const Menu(
+  Menu(
       '928819994241',
       'Meatlover',
       15,
       "https://images.pexels.com/photos/1049626/pexels-photo-1049626.jpeg?cs=srgb&dl=pexels-edward-eyer-1049626.jpg&fm=jpg&h=960&w=640",
       "Pizza",
       true),
-  const Menu(
+  Menu(
       '253525222',
       'Uncle Special',
       15,
       "https://images.pexels.com/photos/2762939/pexels-photo-2762939.jpeg?cs=srgb&dl=pexels-ana-madeleine-uribe-2762939.jpg&fm=jpg&h=960&w=640",
       "Pizza",
       true),
-  const Menu(
+  Menu(
       '888676464',
       'Beef paperoni',
       25,
       "https://images.pexels.com/photos/4394612/pexels-photo-4394612.jpeg?cs=srgb&dl=pexels-natasha-filippovskaya-4394612.jpg&fm=jpg&h=960&w=640",
       "Pizza",
       true),
-  const Menu(
+  Menu(
       '4252353',
       'Hawaian',
       35,
       "https://images.pexels.com/photos/4109077/pexels-photo-4109077.jpeg?cs=srgb&dl=pexels-polina-tankilevitch-4109077.jpg&fm=jpg&h=960&w=640",
       "Pizza",
       true),
-  const Menu(
+  Menu(
       '52325666',
       'Chef Specials',
       13,
       "https://images.pexels.com/photos/4193881/pexels-photo-4193881.jpeg?cs=srgb&dl=pexels-ponyo-sakana-4193881.jpg&fm=jpg&h=960&w=640",
       "Pizza",
       true),
-  const Menu(
+  Menu(
       '534536363',
       'Pasta la vista',
       20,
       "https://images.pexels.com/photos/6287548/pexels-photo-6287548.jpeg?cs=srgb&dl=pexels-klaus-nielsen-6287548.jpg&fm=jpg&h=960&w=640",
       "Pasta",
       true),
-  const Menu(
+  Menu(
       '76868686',
       'Carbonara Pasta',
       23,
       "https://images.pexels.com/photos/1256875/pexels-photo-1256875.jpeg?cs=srgb&dl=pexels-lgh-1256875.jpg&fm=jpg&h=960&w=640",
       "Pasta",
       true),
-  const Menu(
+  Menu(
       '2342626262',
       'Bolognise Pasta',
       14,
       "https://images.pexels.com/photos/5419336/pexels-photo-5419336.jpeg?cs=srgb&dl=pexels-polina-tankilevitch-5419336.jpg&fm=jpg&h=960&w=640",
       "Pasta",
       true),
-  const Menu(
+  Menu(
       '62626222',
       'Aglio Olio Pasta',
       33,
       "https://images.pexels.com/photos/5507643/pexels-photo-5507643.jpeg?cs=srgb&dl=pexels-jess-vide-5507643.jpg&fm=jpg&h=960&w=640",
       "Pasta",
       true),
-  const Menu(
+  Menu(
       '765757555',
       'Lasagne',
       22,
