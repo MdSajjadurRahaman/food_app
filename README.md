@@ -1,5 +1,5 @@
 # food_app
-
+[![CI](https://github.com/naufalfathur/food_app/actions/workflows/main.yml/badge.svg)](https://github.com/naufalfathur/food_app/actions/workflows/main.yml)
 A new universal food reservation, order and delivery for the universal client.
 
 ## Getting Started
