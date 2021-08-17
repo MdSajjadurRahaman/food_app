@@ -32,7 +32,8 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1.2.0
         with:
-          flutter-version: '>=2.12.0 <3.0.0'
+          flutter-version: '2.2.x'
+          channel: 'stable'
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       #- uses: dart-lang/setup-dart@v1
