@@ -42,7 +42,7 @@ jobs:
     #needs: [drive_ios,drive_android,test]
     name: Build  apk  and web
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2.3.1
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '2.x'
