@@ -10,6 +10,9 @@ class AdminReport extends StatefulWidget {
 }
 
 class _AdminReportState extends State<AdminReport> {
+  List<Cart> activeCart = [];
+  List<bool> _minimize = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,6 +81,7 @@ class _AdminReportState extends State<AdminReport> {
         physics: ScrollPhysics(),
         itemCount: order.length,
         itemBuilder: (BuildContext context, int index) {
+          _minimize.add(true);
           String status;
           Color color;
 
@@ -101,37 +105,111 @@ class _AdminReportState extends State<AdminReport> {
           return GestureDetector(
               onTap: () {},
               child: Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                padding: EdgeInsets.only(left: 20),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      spreadRadius: -10,
-                      blurRadius: 10,
-                      offset: Offset(0, 0), // changes position of shadow
+                margin: EdgeInsets.only(bottom: 5),
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            spreadRadius: -10,
+                            blurRadius: 10,
+                            offset: Offset(0, 0), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                        onTap: () {
+                          setState(() {
+                            activeCart.clear();
+                            activeCart = List.from(order[index].cart);
+                            _minimize[index] = !_minimize[index];
+                          });
+                        },
+                        title: Text(formattedDate.toString(),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15,
+                                color: Colors.white)),
+                        subtitle: Text(
+                            "Ordered By " + order[index].customerEmail,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                color: Colors.white)),
+                        trailing: GestureDetector(
+                          onTap: () {},
+                          child: Icon(
+                            _minimize[index]
+                                ? Icons.keyboard_arrow_down
+                                : Icons.keyboard_arrow_up,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
+                    Divider(
+                      color: Colors.white,
+                    ),
+                    Offstage(
+                      offstage: _minimize[index],
+                      child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.black12,
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Wrap(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: ScrollPhysics(),
+                                itemCount: activeCart.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      ListTile(
+                                        leading: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              activeCart[index].url),
+                                        ),
+                                        title: Text(
+                                            activeCart[index]
+                                                    .quantity
+                                                    .toString() +
+                                                " x " +
+                                                activeCart[index].name,
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 15,
+                                                color: Colors.black)),
+                                        trailing: Text(
+                                            "RM " +
+                                                (activeCart[index].price *
+                                                        activeCart[index]
+                                                            .quantity)
+                                                    .toString(),
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 15,
+                                                color: Colors.black)),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
+                          )),
+                    )
                   ],
-                ),
-                child: ListTile(
-                  title: Text(formattedDate.toString(),
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15,
-                          color: Colors.white)),
-                  subtitle: Text(status + " - " + order[index].location,
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          color: Colors.white)),
-                  trailing: Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.white,
-                  ),
                 ),
               ));
         },
