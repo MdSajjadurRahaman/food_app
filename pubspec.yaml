@@ -46,7 +46,13 @@ dependencies:
   pinput: ^1.2.0
   pin_code_fields: ^7.3.0
   numeric_keyboard: ^1.1.0
-  fl_chart: ^0.36.3
+  fl_chart: ^0.36.4
+  font_awesome_flutter: ^9.1.0
+  excel: 2.0.0-null-safety
+  awesome_dialog: ^2.1.1
+  mock_data: ^2.0.0
+  flutter_map: ^0.13.1
+  latlng: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -64,11 +70,14 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/logo2.png
+    - assets/images/foodlogo2.png
     - assets/images/whitedoodle.png
     - assets/images/search.png
     - assets/images/google.png
     - assets/images/prep.gif
     - assets/images/foodLogotitle.png
+    - assets/images/bgpizza.png
+    
 
   # To add assets to your application, add an assets section, like this:
   # assets:

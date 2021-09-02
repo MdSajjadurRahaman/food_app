@@ -73,10 +73,18 @@ class _OrderDetailsState extends State<OrderDetails> {
       prog = 20;
       color = Colors.orangeAccent;
     } else if (orderDetails[0].status == 1) {
+      status = "Cooking";
+      prog = 50;
+      color = Colors.blue;
+    } else if (orderDetails[0].status == 2) {
+      status = "Finding Driver";
+      prog = 50;
+      color = Colors.blue;
+    } else if (orderDetails[0].status == 3) {
       status = "Delivering";
       prog = 70;
       color = Colors.blue;
-    } else if (orderDetails[0].status == 2) {
+    } else if (orderDetails[0].status == 4) {
       status = "Delivered";
       prog = 100;
       color = Colors.green;

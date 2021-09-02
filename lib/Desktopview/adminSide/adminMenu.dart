@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/widgets/sampledata.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class AdminMenu extends StatefulWidget {
   @override
@@ -36,23 +38,37 @@ class _AdminMenuState extends State<AdminMenu> {
               padding: EdgeInsets.all(50),
               child: ListView(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Menus",
-                          style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.w700),
-                          )),
-                      Ink(
-                        decoration: const ShapeDecoration(
-                          color: Colors.red,
-                          shape: CircleBorder(),
+                  Container(
+                    padding: EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Wrap(
+                          direction: Axis.horizontal,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 40,
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.bookOpen,
+                              color: Colors.white,
+                              size: 50,
+                            ),
+                            Text(
+                              "Menus",
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: IconButton(
-                          icon: const Icon(Icons.add),
-                          color: Colors.white,
-                          onPressed: () {
+                        GestureDetector(
+                          onTap: () {
                             setState(() {
                               isEdit = false;
                               name.clear();
@@ -63,11 +79,18 @@ class _AdminMenuState extends State<AdminMenu> {
                               imgUrl = "";
                             });
                           },
+                          child: Icon(
+                            FontAwesomeIcons.plus,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Divider(color: Colors.white),
+                  SizedBox(
+                    height: 10,
+                  ),
                   menu(),
                 ],
               ),
@@ -90,70 +113,82 @@ class _AdminMenuState extends State<AdminMenu> {
           itemCount: menus.length,
           itemBuilder: (BuildContext ctx, index) {
             bool isActive = true;
-            return Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  imgUrl = menus[index].url;
+                  isEdit = true;
+                  id.text = menus[index].id;
+                  name.text = menus[index].name;
+                  price.text = menus[index].price.toString();
+                });
+              },
+              child: Container(
+                margin: EdgeInsets.only(bottom: 10),
+                padding: EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   border: Border(
-                    left: BorderSide(
-                        width: 5.0, color: Theme.of(context).accentColor),
+                    bottom: BorderSide(width: 1.0, color: Colors.black26),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      spreadRadius: -10,
-                      blurRadius: 10,
-                      offset: Offset(0, 0), // changes position of shadow
-                    ),
-                  ],
                 ),
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(menus[index].url),
                   ),
-                  title: Wrap(
-                    children: [
-                      Text(menus[index].name,
-                          style: TextStyle(fontWeight: FontWeight.w900)),
-                      Text(menus[index].isActive ? " Active" : " Inactive",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              color: menus[index].isActive
-                                  ? Theme.of(context).accentColor
-                                  : Colors.grey)),
-                    ],
-                  ),
-                  subtitle: Text(menus[index].category),
-                  trailing: Container(
-                    child: Wrap(
-                      children: [
-                        Text("RM " + menus[index].price.toString(),
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900, fontSize: 15)),
-                        VerticalDivider(
-                          color: Colors.white,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              imgUrl = menus[index].url;
-                              isEdit = true;
-                              id.text = menus[index].id;
-                              name.text = menus[index].name;
-                              price.text = menus[index].price.toString();
-                            });
-                          },
-                          child: Icon(
-                            Icons.edit_outlined,
-                            color: Theme.of(context).accentColor,
-                          ),
-                        ),
-                        Icon(Icons.delete_outline,
-                            color: Theme.of(context).accentColor)
-                      ],
+                  title: Text(
+                    menus[index].name,
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
-                ));
+                  subtitle: Wrap(
+                    direction: Axis.horizontal,
+                    spacing: 20,
+                    children: [
+                      Text(
+                        "RM" + menus[index].price.toString(),
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: Theme.of(context).accentColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      Text(
+                        menus[index].category,
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: Colors.black26,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                  trailing: Wrap(
+                    direction: Axis.horizontal,
+                    spacing: 20,
+                    children: [
+                      Text(
+                        menus[index].isActive ? "Active" : "Inactive",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: menus[index].isActive
+                                  ? Theme.of(context).accentColor
+                                  : Colors.black45,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      Icon(Icons.edit),
+                    ],
+                  ),
+                ),
+              ),
+            );
           }),
     );
   }
@@ -178,8 +213,15 @@ class _AdminMenuState extends State<AdminMenu> {
           ),
           child: ListView(
             children: [
-              Text(isEdit ? "Edit Menu" : "Add New Menu",
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 28)),
+              Text(
+                isEdit ? "Edit Menu" : "Add New Menu",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
               Divider(color: Colors.white),
               Container(
                 height: MediaQuery.of(context).size.height * 0.3,
@@ -217,23 +259,36 @@ class _AdminMenuState extends State<AdminMenu> {
     return GestureDetector(
       onTap: () {
         if (name.text.isNotEmpty && price.text.isNotEmpty) {
-          final addMenu = Menu(
-              id.text,
-              name.text,
-              double.parse(price.text),
-              "https://via.placeholder.com/150.jpg",
-              "Pizza",
-              _groupValue == 0 ? true : false);
-          setState(() {
-            menus.add(addMenu);
-            name.clear();
-            price.clear();
-            category.clear();
-            desc.clear();
-            id.clear();
-          });
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Yay! Menu Added!')));
+          if (isEdit) {
+            setState(() {
+              menus[menus.indexWhere((element) => element.id == id.text)].name =
+                  name.text;
+              menus[menus.indexWhere((element) => element.id == id.text)]
+                  .price = double.parse(price.text);
+              menus[menus.indexWhere((element) => element.id == id.text)]
+                  .isActive = _groupValue == 0 ? true : false;
+            });
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text('Menu Updated!')));
+          } else {
+            final addMenu = Menu(
+                id.text,
+                name.text,
+                double.parse(price.text),
+                "https://via.placeholder.com/150.jpg",
+                "Pizza",
+                _groupValue == 0 ? true : false);
+            setState(() {
+              menus.add(addMenu);
+              name.clear();
+              price.clear();
+              category.clear();
+              desc.clear();
+              id.clear();
+            });
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text('Yay! Menu Added!')));
+          }
         }
       },
       child: Container(

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/Mainpages/homepage.dart';
 import 'package:food_app/Mainpages/menupage.dart';
 import 'package:food_app/Mainpages/morepage.dart';
 import 'package:food_app/Mainpages/orderpage.dart';
 import 'package:food_app/Mainpages/promopage.dart';
+import 'package:food_app/driverside/driverhome.dart';
+import 'package:food_app/widgets/globalWidget.dart';
 import 'package:food_app/widgets/loginMan.dart';
 import 'package:food_app/widgets/registMan.dart';
 import 'package:food_app/widgets/sampledata.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -20,6 +24,8 @@ class _MainPageState extends State<MainPage> {
   PageController pageController = PageController(initialPage: 0);
   int getPageIndex = 0;
   bool isCartfilled = true;
+  TextEditingController uname = TextEditingController();
+  TextEditingController pwd = TextEditingController();
 
   onTapChangePage(int pageIndex) {
     pageController.jumpToPage(pageIndex);
@@ -117,11 +123,9 @@ class _MainPageState extends State<MainPage> {
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.4),
           image: DecorationImage(
-              image: NetworkImage(
-                  "https://images.pexels.com/photos/1301945/pexels-photo-1301945.jpeg?crop=entropy&cs=srgb&dl=pexels-kevin-bidwell-1301945.jpg&fit=crop&fm=jpg&h=960&w=640"),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.4), BlendMode.dstATop)),
+            image: AssetImage("assets/images/bgpizza.png"),
+            fit: BoxFit.cover,
+          ),
         ),
         padding: EdgeInsets.all(30),
         height: MediaQuery.of(context).size.height,
@@ -131,81 +135,42 @@ class _MainPageState extends State<MainPage> {
           children: [
             Container(
               alignment: Alignment.center,
-              height: 100,
+              height: 250,
               child: Image(
-                image: AssetImage("assets/images/logo2.png"),
+                image: AssetImage("assets/images/foodlogo2.png"),
                 fit: BoxFit.fitHeight,
               ),
             ),
-            SizedBox(
-              height: 50,
-            ),
-            SizedBox(
-              height: 40,
-            ),
+            Text("The best pizza in town!",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20))),
             Text(
-              "The best food app in town!",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.normal),
-            ),
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat convallis cras vel rhoncus fringilla.",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12))),
+            button("Login", () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => loginMan()));
+            }, Colors.red, Colors.white, rounded: true),
+            button("Register", () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => registMan()));
+            }, Colors.transparent, Colors.white, rounded: true),
             Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat convallis cras vel rhoncus fringilla.",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w200),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => loginMan()));
-              },
-              child: Container(
-                  padding: EdgeInsets.all(10),
-                  height: 57,
-                  width: 293,
-                  decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(width: 2, color: Colors.red)),
-                  child: Center(
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  )),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => registMan()));
-              },
-              child: Container(
-                  padding: EdgeInsets.all(10),
-                  height: 57,
-                  width: 293,
-                  decoration: BoxDecoration(
-                      color: Color(0x00000000),
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(width: 2, color: Colors.red)),
-                  child: Center(
-                    child: Text(
-                      "Register",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  )),
-            ),
-            Text(
-              "Or, Login with",
-              style: TextStyle(color: Colors.white),
+              "Or, Login using",
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12)),
             ),
             GestureDetector(
               onTap: () {
@@ -225,9 +190,86 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ),
+            Wrap(
+              direction: Axis.horizontal,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 10,
+              children: [
+                Text(
+                  "Not a Customer ?",
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12)),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Driverhome()));
+                  },
+                  child: Text(
+                    "Tap to log in as the driver",
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12)),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
+  }
+
+  loginScreen2() {
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            padding: EdgeInsets.all(30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: 250,
+                  child: Image(
+                    image: AssetImage("assets/images/foodlogo2.png"),
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text("Lets get started",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 25))),
+                textField("Username", uname, isWhite: false),
+                textField("Password", uname, isWhite: false),
+                button("Sign In", () {
+                  setState(() {
+                    isSignedIn = true;
+                  });
+                }, Colors.black, Colors.white, rounded: true, height: 50),
+                Divider(
+                  color: Colors.black38,
+                  thickness: 1,
+                ),
+                button("Continue with Google", () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Driverhome()));
+                }, Theme.of(context).accentColor, Colors.white,
+                    icon: FontAwesomeIcons.google, rounded: true, height: 50),
+              ],
+            ),
+          ),
+        ));
   }
 }

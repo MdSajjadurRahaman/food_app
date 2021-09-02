@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/widgets/sampledata.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -31,30 +32,37 @@ class _AdminPromoState extends State<AdminPromo> {
               padding: EdgeInsets.all(50),
               child: ListView(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Promotions",
-                          style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.w700),
-                          )),
-                      TextButton(
-                          child:
-                              Text("Add Promo", style: TextStyle(fontSize: 14)),
-                          style: ButtonStyle(
-                              padding: MaterialStateProperty.all<EdgeInsets>(
-                                  EdgeInsets.all(20)),
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.white),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Theme.of(context).accentColor),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                              ))),
-                          onPressed: () {
+                  Container(
+                    padding: EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Wrap(
+                          direction: Axis.horizontal,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 40,
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.bookOpen,
+                              color: Colors.white,
+                              size: 50,
+                            ),
+                            Text(
+                              "Promotions",
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ],
+                        ),
+                        GestureDetector(
+                          onTap: () {
                             setState(() {
                               isEdit = false;
                               name.clear();
@@ -63,10 +71,19 @@ class _AdminPromoState extends State<AdminPromo> {
                               amount.clear();
                               imgUrl = "";
                             });
-                          }),
-                    ],
+                          },
+                          child: Icon(
+                            FontAwesomeIcons.plus,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  Divider(color: Colors.white),
+                  SizedBox(
+                    height: 10,
+                  ),
                   promoList(),
                 ],
               ),
@@ -88,73 +105,69 @@ class _AdminPromoState extends State<AdminPromo> {
           physics: ScrollPhysics(),
           itemCount: promotions.length,
           itemBuilder: (BuildContext ctx, index) {
-            return Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  imgUrl = promotions[index].url;
+                  isEdit = true;
+                  id.text = promotions[index].id;
+                  name.text = promotions[index].name;
+                  code.text = promotions[index].promoCode;
+                  amount.text = promotions[index].amount.toString();
+                  _groupValue = promotions[index].isPercentage ? 1 : 0;
+                });
+              },
+              child: Container(
+                margin: EdgeInsets.only(bottom: 10),
+                padding: EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   border: Border(
-                    left: BorderSide(
-                        width: 5.0,
-                        color: promotions[index].status
-                            ? Theme.of(context).accentColor
-                            : Colors.grey),
+                    bottom: BorderSide(width: 1.0, color: Colors.black26),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      spreadRadius: -10,
-                      blurRadius: 10,
-                      offset: Offset(0, 0), // changes position of shadow
-                    ),
-                  ],
                 ),
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(promotions[index].url),
                   ),
-                  title: Wrap(
-                    children: [
-                      Text(promotions[index].name,
-                          style: TextStyle(fontWeight: FontWeight.w900)),
-                      Text(promotions[index].status ? " Active" : " Inactive",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              color: menus[index].isActive
-                                  ? Theme.of(context).accentColor
-                                  : Colors.grey)),
-                    ],
-                  ),
-                  subtitle: Text(promotions[index].promoCode),
-                  trailing: Container(
-                    child: Wrap(
-                      children: [
-                        Text(menus[index].id,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900, fontSize: 15)),
-                        VerticalDivider(
-                          color: Colors.white,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              imgUrl = promotions[index].url;
-                              isEdit = true;
-                              id.text = promotions[index].id;
-                              name.text = promotions[index].name;
-                              code.text = promotions[index].promoCode;
-                            });
-                          },
-                          child: Icon(
-                            Icons.edit_outlined,
-                            color: Theme.of(context).accentColor,
-                          ),
-                        ),
-                        Icon(Icons.delete_outline,
-                            color: Theme.of(context).accentColor)
-                      ],
+                  title: Text(
+                    promotions[index].name,
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
-                ));
+                  subtitle: Text(
+                    promotions[index].promoCode,
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: Colors.black26,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  trailing: Wrap(
+                    direction: Axis.horizontal,
+                    spacing: 20,
+                    children: [
+                      Text(
+                        promotions[index].status ? "Active" : "Inactive",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: promotions[index].status
+                                  ? Theme.of(context).accentColor
+                                  : Colors.black45,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      Icon(Icons.edit),
+                    ],
+                  ),
+                ),
+              ),
+            );
           }),
     );
   }
@@ -186,8 +199,15 @@ class _AdminPromoState extends State<AdminPromo> {
           ),
           child: ListView(
             children: [
-              Text("Add Promotion",
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 28)),
+              Text(
+                "Add Promotion",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
               Divider(color: Colors.white),
               Container(
                 height: MediaQuery.of(context).size.height * 0.2,
@@ -276,8 +296,14 @@ class _AdminPromoState extends State<AdminPromo> {
     return GestureDetector(
       onTap: () {
         if (id.text.isNotEmpty && name.text.isNotEmpty) {
-          final addPromo = Promotion(id.text, name.text, true, code.text,
-              "https://i.ibb.co/NFfysyq/No-Image-Available.png");
+          final addPromo = Promotion(
+              id.text,
+              name.text,
+              true,
+              code.text,
+              "https://i.ibb.co/NFfysyq/No-Image-Available.png",
+              _groupValue == 1,
+              double.parse(amount.text));
           setState(() {
             promotions.add(addPromo);
             id.clear();

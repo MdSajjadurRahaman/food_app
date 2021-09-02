@@ -13,7 +13,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  String selectedCategory = "Pizza";
+  String selectedCategory = "all";
 
   TextEditingController searchController = TextEditingController();
   @override

@@ -290,9 +290,11 @@ class _CheckoutState extends State<Checkout> {
     }));
     final addOrder;
     if (success != null && success == true) {
+      double tax = total * (restaurant[0].tax / 100);
+      double totals = total + tax + 5;
       var orderId = Uuid().v4();
-      addOrder = Order(orderId, "test@mail.com", 2, List.from(cart), 0,
-          "Bangsar, Kuala Lumpur", DateTime.now(), 0);
+      addOrder = Order(orderId, "test@mail.com", 0, List.from(cart), 0,
+          "Bangsar, Kuala Lumpur", DateTime.now(), 0, 5, tax, totals);
       setState(() {
         print("hehe");
         order.add(addOrder);

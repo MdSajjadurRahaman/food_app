@@ -1,15 +1,20 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'dart:math' as math show pi;
 
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/Desktopview/adminSide/adminMenu.dart';
 import 'package:food_app/Desktopview/adminSide/adminOrder.dart';
 import 'package:food_app/Desktopview/adminSide/adminPromo.dart';
 import 'package:food_app/Desktopview/adminSide/adminReport.dart';
 import 'package:food_app/Desktopview/adminSide/adminSetting.dart';
+import 'package:food_app/widgets/chart.dart';
 import 'package:food_app/widgets/headerwidget.dart';
+import 'package:food_app/widgets/sampledata.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:uuid/uuid.dart';
 
 class AdminDashboard extends StatefulWidget {
   @override
@@ -19,6 +24,7 @@ class AdminDashboard extends StatefulWidget {
 class _AdminDashboardState extends State<AdminDashboard> {
   List<CollapsibleItem> _items = [];
   String _headline = "";
+  int accept = 0;
   AssetImage _avatarImg = AssetImage('assets/images/foodLogotitle.png');
   PageController pageController = PageController(initialPage: 0);
   @override
@@ -26,6 +32,202 @@ class _AdminDashboardState extends State<AdminDashboard> {
     super.initState();
     _items = _generateItems;
     _headline = _items.firstWhere((item) => item.isSelected).text;
+  }
+
+  addDummyOrder() async {
+    Random random = new Random();
+    int randomStatus = random.nextInt(3);
+    double totalBeforeTax = 0;
+    double total = 0;
+    double tax = 0;
+    double deliveryfee = 5;
+    for (int i = 1; i < 4; i++) {
+      int randomNumber = random.nextInt(menus.length + 1);
+      final addCart = Cart(
+        menus[randomNumber].id,
+        menus[randomNumber].name,
+        randomStatus + 1,
+        menus[randomNumber].price,
+        menus[randomNumber].url,
+      );
+      totalBeforeTax += (menus[randomNumber].price * (randomStatus + 1));
+      setState(() {
+        cart.add(addCart);
+        print(cart.length);
+      });
+    }
+    tax = totalBeforeTax * (restaurant[0].tax / 100);
+    total = totalBeforeTax + tax + deliveryfee;
+    await showDialog(
+      context: context,
+      builder: (context) {
+        String contentText = "Content of Dialog";
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Scaffold(
+              body: Container(
+                padding: EdgeInsets.all(50),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(color: Theme.of(context).accentColor),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.notifications_active_rounded,
+                      size: 100,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      "New Order Alert",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    Text(
+                      "test@gmail.com",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 50,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              accept = 1;
+                            });
+                          },
+                          child: Text(
+                            "Accept",
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: accept == 1
+                                      ? Colors.white
+                                      : Colors.white38,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              accept = 2;
+                            });
+                          },
+                          child: Text(
+                            "Reject",
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: accept == 2
+                                      ? Colors.white
+                                      : Colors.white38,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Confrim ?",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Colors.white38,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    Offstage(
+                      offstage: accept == 0,
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        spacing: 50,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              if (accept == 1) {
+                                var orderId = Uuid().v4();
+                                final addOrder = Order(
+                                    orderId,
+                                    "test@mail.com",
+                                    0,
+                                    List.from(cart),
+                                    0,
+                                    "Bangsar, Kuala Lumpur",
+                                    DateTime.now(),
+                                    0,
+                                    deliveryfee,
+                                    tax,
+                                    total);
+                                setState(() {
+                                  print("hehe");
+                                  order.add(addOrder);
+                                  cart.clear();
+                                  accept = 0;
+                                });
+                                Navigator.pop(context);
+                              } else {
+                                Navigator.pop(context);
+                                setState(() {
+                                  accept = 0;
+                                });
+                              }
+                            },
+                            child: Text(
+                              "Yes",
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                              setState(() {
+                                accept = 0;
+                              });
+                            },
+                            child: Text(
+                              "No",
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: Colors.white38,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    setState(() {});
   }
 
   List<CollapsibleItem> get _generateItems {
@@ -87,8 +289,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
           avatarImg: _avatarImg,
           title: 'Pizza Restaurant',
           onTitleTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Yay! Flutter Collapsible Sidebar!')));
+            addDummyOrder();
           },
           body: PageView(
             children: <Widget>[
@@ -125,7 +326,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
       color: Colors.blueGrey[50],
       child: Center(
         child: Transform.rotate(
-          angle: math.pi / 2,
+          angle: pi / 2,
           child: Transform.translate(
             offset: Offset(-size.height * 0.3, -size.width * 0.23),
             child: Text(
@@ -295,15 +496,7 @@ class _DashboardState extends State<Dashboard> {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: Text(
-                "Chart Coming Soon",
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      color: Colors.black26,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
+              child: LineChartSample1(),
             ),
             SizedBox(
               height: 15,

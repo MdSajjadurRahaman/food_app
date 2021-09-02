@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      color: Theme.of(context).accentColor,
+      color: HexColor("#111111"),
       alignment: Alignment.center,
       child: Container(
         height: MediaQuery.of(context).size.height,
@@ -64,9 +64,9 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Container(
               alignment: Alignment.center,
-              height: 150,
+              height: 250,
               child: Image(
-                image: AssetImage("assets/images/logo2.png"),
+                image: AssetImage("assets/images/foodlogo2.png"),
                 fit: BoxFit.fitHeight,
               ),
             ),

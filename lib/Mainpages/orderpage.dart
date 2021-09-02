@@ -48,9 +48,15 @@ history(BuildContext context) {
           status = "Preparing";
           color = Colors.orangeAccent;
         } else if (order[index].status == 1) {
+          status = "Cooking";
+          color = Colors.lime;
+        } else if (order[index].status == 2) {
+          status = "Finding Driver";
+          color = Colors.pink;
+        } else if (order[index].status == 3) {
           status = "Delivering";
           color = Colors.blue;
-        } else if (order[index].status == 2) {
+        } else if (order[index].status == 4) {
           status = "Delivered";
           color = Colors.green;
         } else {
@@ -61,7 +67,7 @@ history(BuildContext context) {
         String formattedDate =
             DateFormat('EEEE, dd MMMM yyyy').format(order[index].time);
 
-        if (order[index].status >= 2) {
+        if (order[index].status >= 4) {
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -120,9 +126,15 @@ ongoing(BuildContext context) {
           status = "Preparing";
           color = Colors.orangeAccent;
         } else if (order[index].status == 1) {
+          status = "Cooking";
+          color = Colors.lime;
+        } else if (order[index].status == 2) {
+          status = "Finding Driver";
+          color = Colors.pink;
+        } else if (order[index].status == 3) {
           status = "Delivering";
           color = Colors.blue;
-        } else if (order[index].status == 2) {
+        } else if (order[index].status == 4) {
           status = "Delivered";
           color = Colors.green;
         } else {
@@ -133,7 +145,7 @@ ongoing(BuildContext context) {
         String formattedDate =
             DateFormat('EEEE, dd MMMM yyyy').format(order[index].time);
 
-        if (order[index].status < 2) {
+        if (order[index].status < 4) {
           return GestureDetector(
             onTap: () {
               Navigator.push(
