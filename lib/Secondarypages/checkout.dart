@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_app/Tertiarypages/StripeTest.dart';
 import 'package:food_app/Tertiarypages/paymentpage.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:uuid/uuid.dart';
 
@@ -13,19 +16,43 @@ class Checkout extends StatefulWidget {
 class _CheckoutState extends State<Checkout> {
   double total = 0.0;
   bool usePromo = false;
+  double deliveryFee = 5;
+  double tax = 0;
+  double totals = 0;
+  String discount = "-";
   var _controller = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    countTotal();
+  }
+
   @override
   Widget build(BuildContext context) {
-    countTotal();
     return Scaffold(
-      backgroundColor: HexColor("#F3F3F3"),
-      appBar:
-          appbar(context, strTitle: "Checkout", disappearedBackButton: false),
+      appBar: appbar(context, strTitle: "", disappearedBackButton: false),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         alignment: Alignment.center,
         child: ListView(
-          children: [cartList(), checkoutDetails()],
+          children: [
+            Text(
+              "Order Summary",
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            Divider(
+              color: Colors.black26,
+            ),
+            cartList(),
+            checkoutDetails()
+          ],
         ),
       ),
     );
@@ -33,10 +60,8 @@ class _CheckoutState extends State<Checkout> {
 
   cartList() {
     return Container(
-      margin: EdgeInsets.only(top: 20, bottom: 20),
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15), color: Colors.white),
+      margin: EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
           ListView.builder(
@@ -64,27 +89,34 @@ class _CheckoutState extends State<Checkout> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                            cart[index].quantity.toString() +
-                                "x " +
-                                cart[index].name,
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
+                          cart[index].quantity.toString() +
+                              "x " +
+                              cart[index].name,
+                          textAlign: TextAlign.start,
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                color: Colors.black,
                                 fontSize: 15,
-                                color: Colors.black)),
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
                       ],
                     ),
-                    trailing: Text("RM" + cart[index].price.toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w900,
+                    subtitle: Text(
+                      "RM" + cart[index].price.toString(),
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: Theme.of(context).accentColor,
                             fontSize: 15,
-                            color: Theme.of(context).accentColor)),
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
                   ),
-                  Divider(),
                 ],
               );
             },
           ),
+          /*
           Container(
             //margin: EdgeInsets.symmetric(vertical: 10),
             height: 50,
@@ -108,7 +140,7 @@ class _CheckoutState extends State<Checkout> {
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
-          )
+          )*/
         ],
       ),
     );
@@ -117,7 +149,6 @@ class _CheckoutState extends State<Checkout> {
   checkoutDetails() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15), color: Colors.white),
       child: Column(
@@ -127,14 +158,13 @@ class _CheckoutState extends State<Checkout> {
               ? Text("Promo used : " + _controller.text)
               : Container(
                   decoration: BoxDecoration(
-                    color: HexColor("#EFEFEF"),
+                    border: Border.all(color: Theme.of(context).accentColor),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                   child: Container(
                       //margin: EdgeInsets.symmetric(vertical: 10),
                       height: 40,
                       decoration: BoxDecoration(
-                        color: HexColor("#EFEFEF"),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: TextField(
@@ -160,11 +190,10 @@ class _CheckoutState extends State<Checkout> {
           SizedBox(
             height: 10,
           ),
-          _listtile(Icons.motorcycle, Colors.red, "Delivery", "edit"),
-          _listtile(
-              Icons.location_pin, Colors.blue, "Bangsar, Kuala Lumpur", "edit"),
-          _listtile(Icons.alarm, Colors.orangeAccent, "25 mins", "choose time"),
-          _listtile(Icons.money, Colors.green, "Online Bank", "change"),
+          _listtile(FontAwesomeIcons.locationArrow, Colors.blue,
+              "Bangsar, Kuala Lumpur", "edit"),
+          _listtile(FontAwesomeIcons.moneyCheck, Colors.green, "Online Bank",
+              "change"),
           Container(
             margin: EdgeInsets.symmetric(vertical: 10),
             height: 5,
@@ -176,24 +205,31 @@ class _CheckoutState extends State<Checkout> {
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
           Text(
-            "+ delivery fee RM5",
+            "+ delivery fee = " + deliveryFee.toString(),
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
                 color: Colors.black45,
-                decoration:
-                    usePromo ? TextDecoration.lineThrough : TextDecoration.none,
                 decorationThickness: 2.85),
           ),
           Text(
-            "+ service fee RM2",
+            "+ Tax " + restaurant[0].tax.toString() + "% = " + tax.toString(),
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
                 color: Colors.black45),
           ),
+          usePromo
+              ? Text(
+                  "- Discount " + discount,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black45),
+                )
+              : SizedBox(),
           Text(
-            "RM " + total.toString(),
+            "RM " + totals.toString(),
             style: TextStyle(fontSize: 54, fontWeight: FontWeight.bold),
           ),
           GestureDetector(
@@ -233,7 +269,7 @@ class _CheckoutState extends State<Checkout> {
   }
 
   promoChecK() {
-    print(total);
+    print(totals);
     var contain = promotions.where(
       (element) => element.promoCode == _controller.text,
     );
@@ -242,9 +278,16 @@ class _CheckoutState extends State<Checkout> {
         content: Text("Thank you for using our promo"),
       ));
       setState(() {
-        total = total - 5;
+        int index = promotions
+            .indexWhere((element) => element.promoCode == _controller.text);
+        if (promotions[index].isPercentage) {
+          totals = totals * (promotions[index].amount / 100);
+          discount = promotions[index].amount.toString() + "%";
+        } else {
+          totals = totals - (promotions[index].amount);
+          discount = "RM " + promotions[index].amount.toString();
+        }
         usePromo = true;
-        print(total);
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -260,6 +303,7 @@ class _CheckoutState extends State<Checkout> {
       minLeadingWidth: 1,
       leading: Icon(
         icon,
+        size: 20,
         color: color,
       ),
       title: Text(
@@ -278,7 +322,10 @@ class _CheckoutState extends State<Checkout> {
     for (int i = 0; i < cart.length; i++) {
       total += cart[i].price;
     }
-    total = total + 7;
+    setState(() {
+      tax = total * (restaurant[0].tax / 100);
+      totals = total + tax + 5;
+    });
   }
 
   gotoPayment(
@@ -286,15 +333,19 @@ class _CheckoutState extends State<Checkout> {
   ) async {
     final success =
         await Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return Paymentpage(total: total);
+      if (restaurant[0].paymentGateway == "testing") {
+        return Paymentpage(total: total);
+      } else if (restaurant[0].paymentGateway == "Stripe") {
+        return NoWebhookPaymentScreen();
+      } else {
+        return Paymentpage(total: total);
+      }
     }));
     final addOrder;
     if (success != null && success == true) {
-      double tax = total * (restaurant[0].tax / 100);
-      double totals = total + tax + 5;
       var orderId = Uuid().v4();
       addOrder = Order(orderId, "test@mail.com", 0, List.from(cart), 0,
-          "Bangsar, Kuala Lumpur", DateTime.now(), 0, 5, tax, totals);
+          "Bangsar, Kuala Lumpur", DateTime.now(), 0, deliveryFee, tax, totals);
       setState(() {
         print("hehe");
         order.add(addOrder);

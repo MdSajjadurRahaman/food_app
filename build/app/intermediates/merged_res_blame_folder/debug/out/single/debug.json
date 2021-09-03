@@ -16,10 +16,6 @@
         "source": "/home/naufalfathur/AndroidStudioProjects/food_app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/home/naufalfathur/AndroidStudioProjects/food_app/build/app/intermediates/res/merged/debug/drawable_launch_background.xml.flat",
-        "source": "/home/naufalfathur/AndroidStudioProjects/food_app/android/app/src/main/res/drawable/launch_background.xml"
-    },
-    {
         "merged": "/home/naufalfathur/AndroidStudioProjects/food_app/build/app/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "/home/naufalfathur/AndroidStudioProjects/food_app/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },

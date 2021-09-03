@@ -36,7 +36,7 @@ dependencies:
   uuid: ^3.0.4
   intl: ^0.17.0
   rating_dialog: ^2.0.1
-  flutter_qiblah: ^2.0.1
+  
   geolocator: ^7.2.0+1
   flutter_svg: ^0.22.0
   google_maps_flutter: ^2.0.6
@@ -53,6 +53,7 @@ dependencies:
   mock_data: ^2.0.0
   flutter_map: ^0.13.1
   latlng: ^0.1.0
+  flutter_stripe: ^1.2.0
 
 dev_dependencies:
   flutter_test:

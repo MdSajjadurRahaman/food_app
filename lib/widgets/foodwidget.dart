@@ -83,6 +83,7 @@ class _FoodState extends State<Food> {
               child: Icon(Icons.chevron_left),
             ),
           ),
+          /*
           Container(
               height: 50,
               width: 50,
@@ -91,7 +92,7 @@ class _FoodState extends State<Food> {
               child: Icon(
                 Icons.favorite_rounded,
                 color: Theme.of(context).accentColor,
-              )),
+              )),*/
         ],
       ),
     );
