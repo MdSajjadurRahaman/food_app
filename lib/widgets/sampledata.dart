@@ -176,7 +176,7 @@ List<Profile> profiles = <Profile>[
 ];
 
 List<Restaurant> restaurant = <Restaurant>[
-  Restaurant("Pizza Restaurant", "", "Bangsar, Kuala Lumpur", "Red", "testing",
+  Restaurant("Pizza Restaurant", "", "Bangsar, Kuala Lumpur", "Red", "Stripe",
       "internal", 6),
 ];
 

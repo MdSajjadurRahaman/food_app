@@ -6,15 +6,15 @@ import 'package:food_app/mainpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter_stripe/flutter_stripe.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Stripe.publishableKey =
-      "pk_test_51IpNarIhZLauDZYMVcsxuODmHz0yw9U6Wi7hqbO8IEkEaM3UBV3hmrq8LcRRjAZFa7Xxw503Re5ugKVLlhqfkpy400WjLTzfiq";
+
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   runApp(MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

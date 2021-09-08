@@ -6,6 +6,7 @@ import 'package:food_app/Mainpages/morepage.dart';
 import 'package:food_app/Mainpages/orderpage.dart';
 import 'package:food_app/Mainpages/promopage.dart';
 import 'package:food_app/driverside/driverhome.dart';
+import 'package:food_app/driverside/login_screen.dart';
 import 'package:food_app/widgets/globalWidget.dart';
 import 'package:food_app/widgets/loginMan.dart';
 import 'package:food_app/widgets/registMan.dart';
@@ -53,6 +54,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   homeScreen() {
+
     return Scaffold(
       body: PageView(
         children: <Widget>[
@@ -206,7 +208,7 @@ class _MainPageState extends State<MainPage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Driverhome()));
+                        MaterialPageRoute(builder: (context) => LoginScreen(),));
                   },
                   child: Text(
                     "Tap to log in as the driver",
@@ -225,51 +227,10 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  loginScreen2() {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.all(30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 250,
-                  child: Image(
-                    image: AssetImage("assets/images/foodlogo2.png"),
-                    fit: BoxFit.fitHeight,
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text("Lets get started",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 25))),
-                textField("Username", uname, isWhite: false),
-                textField("Password", uname, isWhite: false),
-                button("Sign In", () {
-                  setState(() {
-                    isSignedIn = true;
-                  });
-                }, Colors.black, Colors.white, rounded: true, height: 50),
-                Divider(
-                  color: Colors.black38,
-                  thickness: 1,
-                ),
-                button("Continue with Google", () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Driverhome()));
-                }, Theme.of(context).accentColor, Colors.white,
-                    icon: FontAwesomeIcons.google, rounded: true, height: 50),
-              ],
-            ),
-          ),
-        ));
-  }
+
+
+
+
+
 }
+

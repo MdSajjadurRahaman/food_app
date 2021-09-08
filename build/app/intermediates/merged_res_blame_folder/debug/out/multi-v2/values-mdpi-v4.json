@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/naufalfathur/AndroidStudioProjects/food_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-mdpi-v4/values-mdpi-v4.xml",
+            "outputFile": "/Users/seifelgendy/StudioProjects/food_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-mdpi-v4/values-mdpi-v4.xml",
             "map": [
                 {
-                    "source": "/home/naufalfathur/.gradle/caches/transforms-2/files-2.1/ff400e28f7e5a59403af58a570180351/jetified-payments-core-16.10.0/res/values-mdpi-v4/values-mdpi-v4.xml",
+                    "source": "/Users/seifelgendy/.gradle/caches/transforms-2/files-2.1/ff400e28f7e5a59403af58a570180351/jetified-payments-core-16.10.0/res/values-mdpi-v4/values-mdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

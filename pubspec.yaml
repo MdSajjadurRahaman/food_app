@@ -53,7 +53,7 @@ dependencies:
   mock_data: ^2.0.0
   flutter_map: ^0.13.1
   latlng: ^0.1.0
-  flutter_stripe: ^1.2.0
+
 
 dev_dependencies:
   flutter_test:
@@ -78,7 +78,8 @@ flutter:
     - assets/images/prep.gif
     - assets/images/foodLogotitle.png
     - assets/images/bgpizza.png
-    
+    - assets/icons/
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

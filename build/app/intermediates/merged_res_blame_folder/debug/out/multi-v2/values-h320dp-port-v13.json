@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/naufalfathur/AndroidStudioProjects/food_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-h320dp-port-v13/values-h320dp-port-v13.xml",
+            "outputFile": "/Users/seifelgendy/StudioProjects/food_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-h320dp-port-v13/values-h320dp-port-v13.xml",
             "map": [
                 {
-                    "source": "/home/naufalfathur/.gradle/caches/transforms-2/files-2.1/bbdd64fa0442a67cd1b08e903d677fac/material-1.3.0/res/values-h320dp-port-v13/values-h320dp-port-v13.xml",
+                    "source": "/Users/seifelgendy/.gradle/caches/transforms-2/files-2.1/bbdd64fa0442a67cd1b08e903d677fac/material-1.3.0/res/values-h320dp-port-v13/values-h320dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

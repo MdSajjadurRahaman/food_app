@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:food_app/Tertiarypages/StripeTest.dart';
 import 'package:food_app/Tertiarypages/paymentpage.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
@@ -336,7 +335,7 @@ class _CheckoutState extends State<Checkout> {
       if (restaurant[0].paymentGateway == "testing") {
         return Paymentpage(total: total);
       } else if (restaurant[0].paymentGateway == "Stripe") {
-        return NoWebhookPaymentScreen();
+        return Container();
       } else {
         return Paymentpage(total: total);
       }
