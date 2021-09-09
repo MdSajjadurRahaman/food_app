@@ -10,7 +10,6 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
-      key: key!,
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,22 +25,22 @@ class Body extends StatelessWidget {
             ),
             RoundedNameField(
               hintText: "Name",
-              onChanged: (value) {}, key: key!,
+              onChanged: (value) {},
             ),
             RoundedNumberField(
               hintText: "Phone number",
-              onChanged: (value) {}, key: key!,
+              onChanged: (value) {},
             ),
             RoundedInputField(
               hintText: "Email",
-              onChanged: (value) {}, key: key!,
+              onChanged: (value) {},
             ),
             RoundedPasswordField(
-              onChanged: (value) {}, key: key!,
+              onChanged: (value) {},
             ),
             RoundedButton(
               text: "SIGNUP",
-              press: () {}, key: key!,
+              press: () {},
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
@@ -55,7 +54,7 @@ class Body extends StatelessWidget {
                     },
                   ),
                 );
-              }, key: key!,
+              },
             ),
             OrDivider(),
             Row(
@@ -63,7 +62,7 @@ class Body extends StatelessWidget {
               children: <Widget>[
                 SocalIcon(
                   iconSrc: "assets/icons/google.svg",
-                  press: () {}, key: key!,
+                  press: () {},
                 ),
               ],
             )
@@ -73,7 +72,6 @@ class Body extends StatelessWidget {
     );
   }
 }
-
 
 class OrDivider extends StatelessWidget {
   @override
@@ -115,10 +113,9 @@ class SocalIcon extends StatelessWidget {
   final String iconSrc;
   final Function press;
   const SocalIcon({
-    required Key key,
     required this.iconSrc,
     required this.press,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

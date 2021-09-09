@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
-  const Background({
-    required Key key,
-    required this.child,
-  }) : super(key: key);
+
+  const Background({required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +11,7 @@ class Background extends StatelessWidget {
     return Container(
       height: size.height,
       width: double.infinity,
-        child: Stack(
+      child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           Positioned(
@@ -33,10 +31,8 @@ class Background extends StatelessWidget {
 
 class Backgroundd extends StatelessWidget {
   final Widget child;
-  const Backgroundd({
-    required Key key,
-    required this.child,
-  }) : super(key: key);
+
+  const Backgroundd({required this.child});
 
   @override
   Widget build(BuildContext context) {

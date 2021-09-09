@@ -6,12 +6,11 @@ class RoundedButton extends StatelessWidget {
   final Function press;
   final Color color, textColor;
   const RoundedButton({
-    required Key key,
     required this.text,
     required this.press,
     this.color = kPrimaryColor,
     this.textColor = Colors.white,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +44,19 @@ class RoundedButton extends StatelessWidget {
   }
 }
 
-
-
 class RoundedInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
   const RoundedInputField({
-    required Key key,
     required this.hintText,
     this.icon = Icons.email,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      key: key!,
       child: TextField(
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
@@ -77,24 +72,20 @@ class RoundedInputField extends StatelessWidget {
     );
   }
 }
-
-
 
 class RoundedNameField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
   const RoundedNameField({
-    required Key key,
     required this.hintText,
     this.icon = Icons.person,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      key: key!,
       child: TextField(
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
@@ -111,18 +102,15 @@ class RoundedNameField extends StatelessWidget {
   }
 }
 
-
 class RoundedPasswordField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   const RoundedPasswordField({
-    required Key key,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      key: key!,
       child: TextField(
         obscureText: true,
         onChanged: onChanged,
@@ -149,16 +137,14 @@ class RoundedNumberField extends StatelessWidget {
   final IconData icon;
   final ValueChanged<String> onChanged;
   const RoundedNumberField({
-    required Key key,
     required this.hintText,
     this.icon = Icons.phone,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      key: key!,
       child: TextField(
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
@@ -174,12 +160,12 @@ class RoundedNumberField extends StatelessWidget {
     );
   }
 }
+
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
   const TextFieldContainer({
-    required Key key,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -197,15 +183,13 @@ class TextFieldContainer extends StatelessWidget {
   }
 }
 
-
 class AlreadyHaveAnAccountCheck extends StatelessWidget {
   final bool login;
   final Function press;
   const AlreadyHaveAnAccountCheck({
-    required Key key,
     this.login = true,
     required this.press,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
