@@ -206,8 +206,10 @@ class _MainPageState extends State<MainPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
                   },
                   child: Text(
                     "Tap to log in as the driver",

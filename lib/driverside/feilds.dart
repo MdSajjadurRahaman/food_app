@@ -3,7 +3,7 @@ import 'package:food_app/widgets/globalWidget.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
-  final Function press;
+  final Function() press;
   final Color color, textColor;
   const RoundedButton({
     required this.text,
@@ -34,7 +34,7 @@ class RoundedButton extends StatelessWidget {
         text,
         style: TextStyle(color: textColor),
       ),
-      onPressed: press(),
+      onPressed: press,
       style: ElevatedButton.styleFrom(
           primary: color,
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
@@ -185,7 +185,7 @@ class TextFieldContainer extends StatelessWidget {
 
 class AlreadyHaveAnAccountCheck extends StatelessWidget {
   final bool login;
-  final Function press;
+  final Function() press;
   const AlreadyHaveAnAccountCheck({
     this.login = true,
     required this.press,
@@ -201,7 +201,7 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
           style: TextStyle(color: kPrimaryColor),
         ),
         GestureDetector(
-          onTap: press(),
+          onTap: press,
           child: Text(
             login ? "Sign Up" : "Sign In",
             style: TextStyle(
