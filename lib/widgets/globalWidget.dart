@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+const kPrimaryColor = Color(0xFFA11313);
+const kPrimaryLightColor = Color(0xFFFFE6E6);
+
 textField(String hint, TextEditingController text,
     {bool multiline = false,
     bool needFooter = false,

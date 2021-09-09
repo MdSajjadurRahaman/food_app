@@ -78,6 +78,8 @@ flutter:
     - assets/images/prep.gif
     - assets/images/foodLogotitle.png
     - assets/images/bgpizza.png
+    - assets/images/
+    - assets/icons/
     
 
   # To add assets to your application, add an assets section, like this:
