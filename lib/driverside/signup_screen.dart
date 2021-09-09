@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:food_app/driverside/background.dart';
 import 'package:food_app/widgets/globalWidget.dart';
-
 import 'feilds.dart';
 import 'login_screen.dart';
 
@@ -144,7 +143,6 @@ class SocalIcon extends StatelessWidget {
     );
   }
 }
-
 
 class SignUpScreen extends StatelessWidget {
   @override
