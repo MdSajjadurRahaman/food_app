@@ -31,7 +31,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
     // TODO: implement initState
     super.initState();
     if (order[index].status == 0) {
-      status = "Preparing";
+      status = "Order Confirmed";
     } else if (order[index].status == 1) {
       status = "Cooking";
     } else if (order[index].status == 2) {
@@ -212,13 +212,25 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                           size: 20)),
                 ],
               )),
-          button(order[index].status == 2 ? "Picked Up" : status, () {
+          button(
+              order[index].status == 2
+                  ? "Picked Up"
+                  : order[index].status == 3
+                      ? "Tap after Delivered"
+                      : "Delivered", () {
             if (order[index].status == 2) {
               setState(() {
                 order[order.indexWhere(
                         (element) => element.orderId == order[index].orderId)]
                     .status = 3;
                 status = "Delivering";
+              });
+            } else if (order[index].status == 3) {
+              setState(() {
+                order[order.indexWhere(
+                        (element) => element.orderId == order[index].orderId)]
+                    .status = 4;
+                status = "Delivered";
               });
             }
           },

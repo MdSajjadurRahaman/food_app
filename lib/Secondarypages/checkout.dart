@@ -191,7 +191,7 @@ class _CheckoutState extends State<Checkout> {
             height: 10,
           ),
           _listtile(FontAwesomeIcons.locationArrow, Colors.blue,
-              "Bangsar, Kuala Lumpur", "edit"),
+              "Bangsar, Kuala Lumpur", ""),
           _listtile(FontAwesomeIcons.moneyCheck, Colors.green, "Online Bank",
               "change"),
           Container(
@@ -281,7 +281,7 @@ class _CheckoutState extends State<Checkout> {
         int index = promotions
             .indexWhere((element) => element.promoCode == _controller.text);
         if (promotions[index].isPercentage) {
-          totals = totals * (promotions[index].amount / 100);
+          totals = totals - (totals * (promotions[index].amount / 100));
           discount = promotions[index].amount.toString() + "%";
         } else {
           totals = totals - (promotions[index].amount);
@@ -336,7 +336,7 @@ class _CheckoutState extends State<Checkout> {
       if (restaurant[0].paymentGateway == "testing") {
         return Paymentpage(total: total);
       } else if (restaurant[0].paymentGateway == "Stripe") {
-        return NoWebhookPaymentScreen();
+        return Paymentpage(total: total); // NoWebhookPaymentScreen();
       } else {
         return Paymentpage(total: total);
       }
@@ -345,7 +345,8 @@ class _CheckoutState extends State<Checkout> {
     if (success != null && success == true) {
       var orderId = Uuid().v4();
       addOrder = Order(orderId, "test@mail.com", 0, List.from(cart), 0,
-          "Bangsar, Kuala Lumpur", DateTime.now(), 0, deliveryFee, tax, totals);
+          "Bangsar, Kuala Lumpur", DateTime.now(), 0, deliveryFee, tax, totals,
+          driverId: "driver1");
       setState(() {
         print("hehe");
         order.add(addOrder);

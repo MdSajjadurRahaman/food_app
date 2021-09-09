@@ -157,7 +157,10 @@ imgWithText(String url, String title, bool activated) {
           height: 10,
         ),
         Text(
-          title,
+          title == "lalamove" || title == "BillPlz"
+              ? title + "\n(Coming Soon)"
+              : title,
+          textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
                 color: activated ? Colors.black : Colors.black38,

@@ -39,13 +39,6 @@ class Promotion {
   bool isPercentage;
 }
 
-class DailySales {
-  DailySales(this.date, this.income, this.order);
-  DateTime date;
-  String income;
-  List<Order> order;
-}
-
 class Profile {
   const Profile(this.user, this.email, this.phone, this.location, this.pwd);
   final user;
@@ -103,14 +96,6 @@ class Order {
   double tax;
   double total;
   String driverId;
-}
-
-class FoodList {
-  const FoodList(this.foodId, this.name, this.url, this.quantity);
-  final String foodId;
-  final String name;
-  final String url;
-  final int quantity;
 }
 
 class Review {
@@ -176,7 +161,7 @@ List<Profile> profiles = <Profile>[
 ];
 
 List<Restaurant> restaurant = <Restaurant>[
-  Restaurant("Pizza Restaurant", "", "Bangsar, Kuala Lumpur", "Red", "testing",
+  Restaurant("Pizza Restaurant", "", "Bangsar, Kuala Lumpur", "Red", "Stripe",
       "internal", 6),
 ];
 

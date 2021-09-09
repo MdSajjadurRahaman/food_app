@@ -24,13 +24,14 @@ class _AdminOrderState extends State<AdminOrder> {
   List<Cart> activeCart = [];
   List<Driver> _driver = [];
   String orderId = "";
+  int orderIndex = 0;
   String customerEmail = "";
   String location = "";
   DateTime time = DateTime.now();
   int paymentMethod = 0;
   double total = 0.0;
-  String dropdownValue = 'Preparing';
-  String currentStatus = 'Preparing';
+  String dropdownValue = 'Confirmed';
+  String currentStatus = 'Order Confirmed';
   bool isDeliver = false;
 
   List<bool> isSelected = [true, false, false];
@@ -330,7 +331,7 @@ class _AdminOrderState extends State<AdminOrder> {
                                                         BorderRadius.circular(
                                                             3),
                                                   ),
-                                                  child: Text("Order Notes ",
+                                                  child: Text("Order Totals ",
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:
@@ -346,11 +347,86 @@ class _AdminOrderState extends State<AdminOrder> {
                                                         BorderRadius.circular(
                                                             3),
                                                   ),
-                                                  child: Text(loremipsum,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 13)),
+                                                  child: Wrap(
+                                                    runSpacing: 20,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text("Tax",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      13)),
+                                                          Text(
+                                                              "RM " +
+                                                                  order[index]
+                                                                      .tax
+                                                                      .toString(),
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      13)),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text("Delivery Fee",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      13)),
+                                                          Text(
+                                                              "RM " +
+                                                                  order[index]
+                                                                      .deliveryfee
+                                                                      .toString(),
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      13)),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text("Totals",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      13)),
+                                                          Text(
+                                                              "RM " +
+                                                                  order[index]
+                                                                      .total
+                                                                      .toString(),
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      13)),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -369,7 +445,7 @@ class _AdminOrderState extends State<AdminOrder> {
             ),
           ),
           bottomNavigationBar: Offstage(
-            offstage: orderId == "",
+            offstage: orderId == "" || !isOngoing,
             child: submit(),
           )),
     );
@@ -534,9 +610,9 @@ class _AdminOrderState extends State<AdminOrder> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  currentStatus == "Preparing"
+                                  currentStatus == "Order Confirmed"
                                       ? iconWithText(FontAwesomeIcons.utensils,
-                                          "Preparing", true)
+                                          "Order Confirmed", true)
                                       : currentStatus == "Cooking"
                                           ? iconWithText(
                                               FontAwesomeIcons.utensils,
@@ -550,7 +626,8 @@ class _AdminOrderState extends State<AdminOrder> {
                                                   true)
                                               : currentStatus == "Delivering"
                                                   ? iconWithText(
-                                                      FontAwesomeIcons.utensils,
+                                                      FontAwesomeIcons
+                                                          .truckLoading,
                                                       "Delivering",
                                                       true)
                                                   : currentStatus == "Delivered"
@@ -581,9 +658,10 @@ class _AdminOrderState extends State<AdminOrder> {
                                     dropdownColor:
                                         Theme.of(context).accentColor,
                                     value: dropdownValue,
-                                    icon: const Icon(
-                                      Icons.arrow_downward,
+                                    icon: Icon(
+                                      FontAwesomeIcons.chevronDown,
                                       color: Colors.white,
+                                      size: 20,
                                     ),
                                     iconSize: 24,
                                     elevation: 16,
@@ -598,7 +676,7 @@ class _AdminOrderState extends State<AdminOrder> {
                                       });
                                     },
                                     items: <String>[
-                                      'Preparing',
+                                      'Confirmed',
                                       'Cooking',
                                       'Delivering',
                                     ].map<DropdownMenuItem<String>>(
@@ -631,13 +709,13 @@ class _AdminOrderState extends State<AdminOrder> {
                               ),
                               TextButton(
                                 onPressed: () => setState(() {
-                                  if (dropdownValue == "Preparing") {
+                                  if (dropdownValue == "Confirmed") {
                                     order[order.indexWhere((element) =>
                                             element.orderId == orderId)]
                                         .status = 0;
                                     currentStatus = dropdownValue;
                                     Navigator.pop(context, 'Cancel');
-                                  } else if (dropdownValue == "Start Cooking") {
+                                  } else if (dropdownValue == "Cooking") {
                                     order[order.indexWhere((element) =>
                                             element.orderId == orderId)]
                                         .status = 1;
@@ -733,7 +811,7 @@ class _AdminOrderState extends State<AdminOrder> {
           Color color;
 
           if (order[index].status == 0) {
-            status = "Preparing";
+            status = "Order Confirmed";
             color = Colors.orangeAccent;
           } else if (order[index].status == 1) {
             status = "Cooking";
@@ -765,6 +843,7 @@ class _AdminOrderState extends State<AdminOrder> {
                     customerEmail = order[index].customerEmail;
                     location = order[index].location;
                     time = order[index].time;
+                    orderIndex = index;
                     paymentMethod = order[index].paymentMethod;
                     activeCart.clear();
                     _driver.clear();
@@ -827,7 +906,7 @@ class _AdminOrderState extends State<AdminOrder> {
           Color color;
 
           if (order[index].status == 0) {
-            status = "Preparing";
+            status = "Order Confirmed";
             color = Colors.orangeAccent;
           } else if (order[index].status == 1) {
             status = "Cooking";
@@ -858,6 +937,7 @@ class _AdminOrderState extends State<AdminOrder> {
                     activeCart.clear();
                     _driver.clear();
                     isDeliver = false;
+                    orderIndex = index;
                     activeCart = List.from(order[index].cart);
                   });
                 },

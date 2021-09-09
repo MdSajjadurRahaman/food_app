@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_app/widgets/globalWidget.dart';
 import 'package:food_app/widgets/headerwidget.dart';
 import 'package:food_app/widgets/ratingwidget.dart';
 import 'package:food_app/widgets/sampledata.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
@@ -30,11 +33,12 @@ class _OrderDetailsState extends State<OrderDetails> {
     print(orderDetails[0].status);
 
     return Scaffold(
-      appBar: appbar(context,
-          strTitle: "Order Details", disappearedBackButton: false),
-      backgroundColor: HexColor("#F3F3F3"),
+      appBar: appbar2(context,
+          strTitle: "Order Details",
+          disappearedBackButton: false,
+          row: refresh()),
+      //backgroundColor: HexColor("#F3F3F3"),
       body: Container(
-        padding: EdgeInsets.all(20),
         child: Stack(
           children: [
             Container(
@@ -43,23 +47,44 @@ class _OrderDetailsState extends State<OrderDetails> {
               width: MediaQuery.of(context).size.width,
               //color: Colors.red,
               child: Container(
-                width: 50,
-                child: orderDetails[0].status != 2
-                    ? Image(
-                        image: AssetImage("assets/images/prep.gif"),
-                        fit: BoxFit.fitWidth,
-                      )
-                    : Icon(
-                        Icons.check,
-                        size: 150,
-                        color: Colors.green,
-                      ),
-              ),
+                  alignment: Alignment.center,
+                  color: Theme.of(context).accentColor,
+                  width: 50,
+                  child: orderDetails[0].status == 0
+                      ? iconWithText(
+                          FontAwesomeIcons.utensils, "Order Confirmed", true)
+                      : orderDetails[0].status == 1
+                          ? iconWithText(
+                              FontAwesomeIcons.utensils, "Cooking", true)
+                          : orderDetails[0].status == 2
+                              ? iconWithText(FontAwesomeIcons.utensils,
+                                  "Waiting for Driver", true)
+                              : orderDetails[0].status == 3
+                                  ? iconWithText(FontAwesomeIcons.truckLoading,
+                                      "Delivering", true)
+                                  : orderDetails[0].status == 4
+                                      ? iconWithText(FontAwesomeIcons.check,
+                                          "Order Delivered", true)
+                                      : iconWithText(FontAwesomeIcons.stop,
+                                          "Order Cancelled", true)),
             ),
             bottomWidget(),
           ],
         ),
       ),
+    );
+  }
+
+  Row refresh() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        iconButton(Icons.refresh, () {
+          setState(() {
+            orderDetails[0].status++;
+          });
+        }, shaddow: false)
+      ],
     );
   }
 
@@ -69,15 +94,15 @@ class _OrderDetailsState extends State<OrderDetails> {
     int prog;
 
     if (orderDetails[0].status == 0) {
-      status = "Preparing";
-      prog = 20;
+      status = "Order Confirmed";
+      prog = 10;
       color = Colors.orangeAccent;
     } else if (orderDetails[0].status == 1) {
       status = "Cooking";
-      prog = 50;
+      prog = 20;
       color = Colors.blue;
     } else if (orderDetails[0].status == 2) {
-      status = "Finding Driver";
+      status = "Waiting for Driver";
       prog = 50;
       color = Colors.blue;
     } else if (orderDetails[0].status == 3) {
@@ -96,52 +121,59 @@ class _OrderDetailsState extends State<OrderDetails> {
 
     return Positioned(
       bottom: 15,
-      left: 10,
-      right: 10,
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              iconWithText(Icons.fiber_manual_record, status, color),
-              iconWithText(
-                  Icons.location_pin, orderDetails[0].location, Colors.blue),
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            height: 8,
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              child: LinearProgressIndicator(
-                value: prog / 100,
-                color: Theme.of(context).accentColor,
-                backgroundColor: Color(0xffD6D6D6),
+      left: 0,
+      right: 0,
+      child: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                iconWithText2(Icons.fiber_manual_record, status, color),
+                iconWithText2(
+                    Icons.location_pin, orderDetails[0].location, Colors.blue),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              width: MediaQuery.of(context).size.width,
+              height: 8,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                child: LinearProgressIndicator(
+                  value: prog / 100,
+                  color: Theme.of(context).accentColor,
+                  backgroundColor: Color(0xffD6D6D6),
+                ),
               ),
             ),
-          ),
-          Container(
-              padding: EdgeInsets.all(20),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    spreadRadius: -25,
-                    blurRadius: 30,
-                    offset: Offset(0, -10), // changes position of shadow
+            Offstage(
+              offstage: orderDetails[0].status < 3,
+              child: Container(
+                  padding: EdgeInsets.all(20),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        spreadRadius: -25,
+                        blurRadius: 30,
+                        offset: Offset(0, -10), // changes position of shadow
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: orderDetails[0].status < 2
-                  ? onGoingColumn()
-                  : orderDetails[0].status == 2
-                      ? deliveredColumn()
-                      : canceledColumn())
-        ],
+                  child: orderDetails[0].status == 3
+                      ? onGoingColumn()
+                      : orderDetails[0].status == 4
+                          ? deliveredColumn()
+                          : canceledColumn()),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -155,32 +187,28 @@ class _OrderDetailsState extends State<OrderDetails> {
           style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
         ),
         ListTile(
-          leading: Icon(
-            Icons.account_box,
-            size: 50,
-          ),
-          title: Text(
-            "John Doe",
-            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-          ),
-          subtitle: Text("VAP2002K"),
-        ),
-        Divider(
-          thickness: 1,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Icon(
-              Icons.message,
-              color: Theme.of(context).accentColor,
+            contentPadding: EdgeInsets.all(0),
+            leading: Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Icon(
+                FontAwesomeIcons.solidUserCircle,
+                color: Theme.of(context).accentColor,
+                size: 30,
+              ),
             ),
-            Icon(
-              Icons.call,
-              color: Theme.of(context).accentColor,
-            )
-          ],
-        )
+            title: Text(
+              orderDetails[0].driverId,
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+              ),
+            ),
+            trailing: GestureDetector(
+              onTap: () {},
+              child: Icon(
+                Icons.phone,
+                color: Colors.black,
+              ),
+            )),
       ],
     );
   }
@@ -315,7 +343,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     );
   }
 
-  iconWithText(IconData icon, String text, Color color) {
+  iconWithText2(IconData icon, String text, Color color) {
     return Row(
       children: [
         Icon(

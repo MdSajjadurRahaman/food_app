@@ -340,7 +340,7 @@ class _AdminReportState extends State<AdminReport> {
           Color color;
 
           if (order[index].status == 0) {
-            status = "Preparing";
+            status = "Order Confirmed";
             color = Colors.orangeAccent;
           } else if (order[index].status == 1) {
             status = "Cooking";

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/Secondarypages/orderdetails.dart';
 import 'package:food_app/widgets/sampledata.dart';
 import 'package:food_app/widgets/tabheaderwidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class Orderpage extends StatefulWidget {
@@ -16,18 +17,20 @@ class _OrderpageState extends State<Orderpage> {
         length: 2,
         child: Scaffold(
           appBar: appbartab(context, strTitle: "My Orders"),
-          body: TabBarView(children: <Widget>[
-            Center(
-              child: order.length == 0
-                  ? Center(child: Text("No order available"))
-                  : ongoing(context),
-            ),
-            Center(
-              child: order.length == 0
-                  ? Text("No order available")
-                  : history(context),
-            )
-          ]),
+          body: Container(
+            child: TabBarView(children: <Widget>[
+              Center(
+                child: order.length == 0
+                    ? Center(child: Text("No order available"))
+                    : ongoing(context),
+              ),
+              Center(
+                child: order.length == 0
+                    ? Text("No order available")
+                    : history(context),
+              )
+            ]),
+          ),
         ));
   }
 }
@@ -45,7 +48,7 @@ history(BuildContext context) {
         Color color;
 
         if (order[index].status == 0) {
-          status = "Preparing";
+          status = "Order Confirmed";
           color = Colors.orangeAccent;
         } else if (order[index].status == 1) {
           status = "Cooking";
@@ -84,18 +87,26 @@ history(BuildContext context) {
                 ListTile(
                   contentPadding: EdgeInsets.all(0),
                   trailing: Icon(Icons.fiber_manual_record, color: color),
-                  title: Text(formattedDate.toString(),
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15,
-                          color: Colors.black)),
-                  subtitle: Text(status + " - " + order[index].location,
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          color: Colors.black)),
+                  title: Text(
+                    formattedDate.toString(),
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  subtitle: Text(
+                    status + " - " + order[index].location,
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
                 ),
                 Divider(
                   thickness: 2,
@@ -123,7 +134,7 @@ ongoing(BuildContext context) {
         Color color;
 
         if (order[index].status == 0) {
-          status = "Preparing";
+          status = "Order Confirmed";
           color = Colors.orangeAccent;
         } else if (order[index].status == 1) {
           status = "Cooking";
@@ -162,18 +173,26 @@ ongoing(BuildContext context) {
                 ListTile(
                   contentPadding: EdgeInsets.all(0),
                   trailing: Icon(Icons.fiber_manual_record, color: color),
-                  title: Text(formattedDate.toString(),
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15,
-                          color: Colors.black)),
-                  subtitle: Text(status + " - " + order[index].location,
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          color: Colors.black)),
+                  title: Text(
+                    formattedDate.toString(),
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  subtitle: Text(
+                    status + " - " + order[index].location,
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
                 ),
                 Divider(
                   thickness: 2,
